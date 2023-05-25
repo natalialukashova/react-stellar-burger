@@ -1,0 +1,9 @@
+.ingredients {
+   display: flex;
+   flex-direction: column;
+   min-width: 600px;
+}
+
+.tab {
+   display: flex;
+}
