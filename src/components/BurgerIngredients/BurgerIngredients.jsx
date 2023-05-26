@@ -11,7 +11,7 @@ export default function BurgerIngredients() {
   const main = data.filter((item) => item.type === "main");
 
   return (
-    <div className={ingredientStyles.ingredients}>
+    <div className={`${ingredientStyles.ingredients} ml-4`}>
       <h2 className="text text_type_main-large mt-10">Соберите бургер</h2>
       <div className={`${ingredientStyles.tab} mt-5`}>
         <Tab value="bun" active={current === "bun"} onClick={setCurrent}>
