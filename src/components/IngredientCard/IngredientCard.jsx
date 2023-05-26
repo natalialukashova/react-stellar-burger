@@ -4,13 +4,13 @@ import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-c
 
 export default function IngredientCard({item}) {
   return (
-    <div className={cardStyle.card}>
+    <div className={`${cardStyle.card} mb-8`}>
       <img src={item.image} alt={item.name} />
-      <div>
+      <div className={`${cardStyle.price} mt-1`}>
         <p className="text text_type_main-default">{item.price}</p>
         <CurrencyIcon />
       </div>
-      <p className="text text_type_main-default">{item.name}</p>
+      <p className={`${cardStyle.name} text text_type_main-default mt-1`}>{item.name}</p>
       <Counter />
     </div>
   );

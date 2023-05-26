@@ -28,23 +28,23 @@ export default function BurgerIngredients() {
           Начинки
         </Tab>
       </div>
-      <section>
-        <h3 className="text text_type_main-medium">Булки</h3>
-        <div>
+      <section className={ingredientStyles.section}>
+        <h3 className="text text_type_main-medium mb-6 mt-10">Булки</h3>
+        <div className={ingredientStyles.cardList}>
           {buns.map((item) => (
             <IngredientCard item={item} />
           ))}
         </div>
 
-        <h3 className="text text_type_main-medium">Соусы</h3>
-        <div>
+        <h3 className="text text_type_main-medium mb-6 mt-10">Соусы</h3>
+        <div className={ingredientStyles.cardList}>
         {sauces.map((item) => (
             <IngredientCard item={item} />
           ))}
         </div>
 
-        <h3 className="text text_type_main-medium">Начинки</h3>
-        <div>
+        <h3 className="text text_type_main-medium mb-6 mt-10">Начинки</h3>
+        <div className={ingredientStyles.cardList}>
         {main.map((item) => (
             <IngredientCard item={item} />
           ))}
