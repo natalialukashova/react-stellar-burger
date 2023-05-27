@@ -9,11 +9,7 @@ import {
 
 export default function BurgerConstructor({ data }) {
   const bunBurger = data.find((item) => item.type === "bun");
-  const withoutBuns = data.filter((item) => {
-    if (item.type === "main" && item.type === "sauces") {
-      return item;
-    }
-  });
+  const withoutBuns = data.filter((item) => item.type !== "bun");
 
   return (
     <div className="mt-25 ml-4">
@@ -23,11 +19,12 @@ export default function BurgerConstructor({ data }) {
         text="Краторная булка N-200i (верх)"
         price={200}
         thumbnail={bunBurger.image_mobile}
+        className={`${constuctorStyle.bun} ml-8`}
       />
 
-      <div className="mt-4 mb-4 pr-4">
+      <div className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}>
         {withoutBuns.map((item) => (
-          <div key={item._id} className="pt-4">
+          <div key={item._id} className={`${constuctorStyle.mainItem} pt-4`}>
             <DragIcon type="primary" />
             <ConstructorElement
               text={item.name}
@@ -44,9 +41,10 @@ export default function BurgerConstructor({ data }) {
         text="Краторная булка N-200i (низ)"
         price={200}
         thumbnail={bunBurger.image_mobile}
+        className={`${constuctorStyle.bun} ml-8`}
       />
-      <div className="mt-10">
-        <div className="mr-10">
+      <div className={`${constuctorStyle.footer} mt-10`}>
+        <div className={`${constuctorStyle.price} mr-10`}>
           <p className="text text_type_digits-medium pr-3">610</p>
           <CurrencyIcon type="primary" />
         </div>
