@@ -5,6 +5,8 @@ import {
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import PropTypes from "prop-types";
+import { ingredientPropType } from '../../utils/prop-types'
 
 export default function IngredientCard({ item, openModal }) {
   function onClick() {
@@ -26,3 +28,8 @@ export default function IngredientCard({ item, openModal }) {
     </div>
   );
 }
+
+IngredientCard.propTypes = {
+  item: ingredientPropType,
+  openModal: PropTypes.func,
+};

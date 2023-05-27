@@ -1,5 +1,6 @@
 import React from "react";
 import detailsStyle from "../IngredientDetails/IngredientDetails.module.css";
+import { ingredientPropType } from "../../utils/prop-types";
 
 export default function IngredientDetails({ item }) {
   return (
@@ -39,3 +40,7 @@ export default function IngredientDetails({ item }) {
     </div>
   );
 }
+
+IngredientDetails.propTypes = {
+  item: ingredientPropType,
+};

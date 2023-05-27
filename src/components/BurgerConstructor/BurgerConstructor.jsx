@@ -6,10 +6,18 @@ import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import OrderDetails from "../OrderDetails/OrderDetails";
+import PropTypes from "prop-types";
+import { ingredientPropType } from '../../utils/prop-types'
 
-export default function BurgerConstructor({ data }) {
+export default function BurgerConstructor({ data, openModal }) {
   const bunBurger = data.find((item) => item.type === "bun");
   const withoutBuns = data.filter((item) => item.type !== "bun");
+
+  function onClick() {
+    const childModal = <OrderDetails order={"034536"} />;
+    openModal(childModal);
+  }
 
   return (
     <section className={`${constuctorStyle.content} mt-25 ml-4`}>
@@ -48,10 +56,15 @@ export default function BurgerConstructor({ data }) {
           <p className="text text_type_digits-medium pr-3">610</p>
           <CurrencyIcon type="primary" />
         </div>
-        <Button htmlType="button" type="primary" size="medium">
+        <Button htmlType="button" type="primary" size="medium" onClick={onClick}>
           Оформить заказ
         </Button>
       </div>
     </section>
   );
+}
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(ingredientPropType),
+  openModal: PropTypes.func,
 }
