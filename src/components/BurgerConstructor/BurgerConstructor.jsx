@@ -12,14 +12,14 @@ export default function BurgerConstructor({ data }) {
   const withoutBuns = data.filter((item) => item.type !== "bun");
 
   return (
-    <div className="mt-25 ml-4">
+    <div className={`${constuctorStyle.bun} mt-25 ml-4`}>
       <ConstructorElement
         type="top"
         isLocked={true}
         text="Краторная булка N-200i (верх)"
         price={200}
         thumbnail={bunBurger.image_mobile}
-        className={`${constuctorStyle.bun} ml-8`}
+        className="ml-8"
       />
 
       <div className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}>
