@@ -32,21 +32,21 @@ export default function BurgerIngredients({data, openModal}) {
         <h3 className="text text_type_main-medium mb-6 mt-10">Булки</h3>
         <div className={ingredientStyles.cardList}>
           {buns.map((item) => (
-            <IngredientCard item={item} openModal={openModal} />
+            <IngredientCard item={item} key={item.id} openModal={openModal} />
           ))}
         </div>
 
         <h3 className="text text_type_main-medium mb-6 mt-10">Соусы</h3>
         <div className={ingredientStyles.cardList}>
         {sauces.map((item) => (
-            <IngredientCard item={item} openModal={openModal} />
+            <IngredientCard item={item} key={item.id} openModal={openModal} />
           ))}
         </div>
 
         <h3 className="text text_type_main-medium mb-6 mt-10">Начинки</h3>
         <div className={ingredientStyles.cardList}>
         {main.map((item) => (
-            <IngredientCard item={item} openModal={openModal} />
+            <IngredientCard item={item} key={item.id} openModal={openModal} />
           ))}
         </div>
       </section>
