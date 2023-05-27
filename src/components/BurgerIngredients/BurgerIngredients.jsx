@@ -4,7 +4,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientCard from "../IngredientCard/IngredientCard";
 import { data } from "../../utils/data";
 
-export default function BurgerIngredients() {
+export default function BurgerIngredients({data, openModal}) {
   const [current, setCurrent] = React.useState("bun");
   const buns = data.filter((item) => item.type === "bun");
   const sauces = data.filter((item) => item.type === "sauce");
@@ -32,21 +32,21 @@ export default function BurgerIngredients() {
         <h3 className="text text_type_main-medium mb-6 mt-10">Булки</h3>
         <div className={ingredientStyles.cardList}>
           {buns.map((item) => (
-            <IngredientCard item={item} />
+            <IngredientCard item={item} openModal={openModal} />
           ))}
         </div>
 
         <h3 className="text text_type_main-medium mb-6 mt-10">Соусы</h3>
         <div className={ingredientStyles.cardList}>
         {sauces.map((item) => (
-            <IngredientCard item={item} />
+            <IngredientCard item={item} openModal={openModal} />
           ))}
         </div>
 
         <h3 className="text text_type_main-medium mb-6 mt-10">Начинки</h3>
         <div className={ingredientStyles.cardList}>
         {main.map((item) => (
-            <IngredientCard item={item} />
+            <IngredientCard item={item} openModal={openModal} />
           ))}
         </div>
       </section>
