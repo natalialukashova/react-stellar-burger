@@ -12,7 +12,7 @@ export default function BurgerConstructor({ data }) {
   const withoutBuns = data.filter((item) => item.type !== "bun");
 
   return (
-    <div className={`${constuctorStyle.content} mt-25 ml-4`}>
+    <section className={`${constuctorStyle.content} mt-25 ml-4`}>
       <ConstructorElement
         type="top"
         isLocked={true}
@@ -52,6 +52,6 @@ export default function BurgerConstructor({ data }) {
           Оформить заказ
         </Button>
       </div>
-    </div>
+    </section>
   );
 }
