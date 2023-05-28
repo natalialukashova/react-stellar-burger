@@ -15,10 +15,6 @@ export default function Modal({ closeModal, children, headerModal = "" }) {
     }
   }
 
-  function clickOverlay() {
-    closeModal();
-  }
-
   React.useEffect(() => {
     document.addEventListener("keydown", closeEsc);
     return () => {
@@ -28,7 +24,6 @@ export default function Modal({ closeModal, children, headerModal = "" }) {
 
   return ReactDOM.createPortal(
     <>
-      <div className={`${modalStyle.overlay} `} onClick={clickOverlay}>
         <div className={`${modalStyle.modal} `}>
           <div className={modalStyle.main}>
             <div className={modalStyle.header}>
@@ -42,7 +37,6 @@ export default function Modal({ closeModal, children, headerModal = "" }) {
             {children}
           </div>
         </div>
-      </div>
     </>,
     modalRoot
   );

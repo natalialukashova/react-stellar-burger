@@ -1,16 +1,3 @@
-.overlay {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.6);
-  opacity: 1;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
 .modal {
   min-height: 500px;
   position: fixed;
@@ -21,7 +8,7 @@
   justify-content: center;
   background-color: #1c1c21;
   top: calc(50vh - 300px);
-  left: calc(50vw - 200px);
+  left: calc(50vw - 300px);
   border-radius: 40px;
   border: 1px solid rgba(76, 76, 255, 0.2);
   width: 620px;
