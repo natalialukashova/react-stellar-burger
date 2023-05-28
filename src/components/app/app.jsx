@@ -13,7 +13,7 @@ function App() {
   const [headerModal, setheaderModal] = React.useState("");
   const [childModal, setChildModal] = React.useState("");
 
-  function openModal(mainModal, modalHeaderName = "") {
+  function openModal(modalHeaderName = "", mainModal) {
     setChildModal(mainModal);
     setheaderModal(modalHeaderName);
     setIsModalOpen(true);

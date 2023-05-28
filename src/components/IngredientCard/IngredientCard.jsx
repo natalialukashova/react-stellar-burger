@@ -10,8 +10,8 @@ import { ingredientPropType } from '../../utils/prop-types'
 
 export default function IngredientCard({ item, openModal }) {
   function onClick() {
-    openModal('', childModal);
     const childModal = <IngredientDetails item={item} />;
+    openModal('', childModal);
   }
 
   return (
