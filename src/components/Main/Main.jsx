@@ -5,7 +5,7 @@ import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import PropTypes from "prop-types";
 import { ingredientPropType } from '../../utils/prop-types'
 
-export default function Main({ data, openModal }) {
+function Main({ data, openModal }) {
   return (
     <div className={mainStyles.main}>
       <BurgerIngredients data={data} openModal={openModal} />
@@ -13,6 +13,8 @@ export default function Main({ data, openModal }) {
     </div>
   );
 }
+
+export default React.memo(Main);
 
 Main.propTypes = {
   data: PropTypes.arrayOf(ingredientPropType),
