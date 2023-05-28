@@ -19,9 +19,9 @@ function App() {
     setIsModalOpen(true);
   }
 
-  function closeModal() {
+  const closeModal = React.useCallback(() => {
     setIsModalOpen(false);
-  }
+  }, []);
 
   useEffect(() => {
     api
@@ -37,9 +37,9 @@ function App() {
       <AppHeader />
       <Main data={data} openModal={openModal} />
       {isModalOpen && (
-          <Modal headerModal={headerModal} closeModal={closeModal}>
-            {childModal}
-          </Modal>
+        <Modal headerModal={headerModal} closeModal={closeModal}>
+          {childModal}
+        </Modal>
       )}
     </div>
   );
