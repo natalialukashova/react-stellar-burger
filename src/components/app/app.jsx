@@ -6,7 +6,6 @@ import Main from "../Main/Main";
 import { useEffect, useState } from "react";
 import { api, config } from "../../Api/Api";
 import Modal from "../Modal/Modal";
-import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -38,11 +37,9 @@ function App() {
       <AppHeader />
       <Main data={data} openModal={openModal} />
       {isModalOpen && (
-        <ModalOverlay closeModal={closeModal}>
           <Modal headerModal={headerModal} closeModal={closeModal}>
             {childModal}
           </Modal>
-        </ModalOverlay>
       )}
     </div>
   );

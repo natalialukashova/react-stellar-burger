@@ -4,6 +4,7 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import modalStyle from "../Modal/Modal.module.css";
 import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types";
+import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
 const modalRoot = document.getElementById("modal");
 
@@ -13,6 +14,10 @@ export default function Modal({ closeModal, children, headerModal = "" }) {
       evt.preventDefault();
       closeModal();
     }
+  }
+
+  function clickOverlay() {
+    closeModal();
   }
 
   React.useEffect(() => {
@@ -37,6 +42,7 @@ export default function Modal({ closeModal, children, headerModal = "" }) {
             {children}
           </div>
         </div>
+        <ModalOverlay onClick={clickOverlay} />
     </>,
     modalRoot
   );
