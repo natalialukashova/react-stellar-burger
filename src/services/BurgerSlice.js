@@ -55,7 +55,7 @@ export const { setConstuctor, setIngredient } = burgerSlice.actions;
 
 export const selectIngredients = (state) => ({
   items: state[SLICE].ingredients,
-  loading: (state[SLICE].status = "loading"),
+  loading: (state[SLICE].status === "loading"),
 });
 
 export const selectIngredient = (id) => (state) => {

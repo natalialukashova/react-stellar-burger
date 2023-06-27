@@ -42,7 +42,7 @@ export default function BurgerIngredients({ openModal }) {
       </div>
       <section className={ingredientStyles.section}>
         {loading ? (
-          <p className="text text_type_main-medium">Ингредиенты загружаются</p>
+          <p className="text text_type_main-medium mt-4">Ингредиенты загружаются...</p>
         ) : (
           <>
             <h3 className="text text_type_main-medium mb-6 mt-10">Булки</h3>
