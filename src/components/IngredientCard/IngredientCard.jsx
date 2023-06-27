@@ -8,23 +8,23 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import PropTypes from "prop-types";
 import { ingredientPropType } from '../../utils/prop-types'
 
-export default function IngredientCard({ item, openModal }) {
-  function onClick() {
-    const childModal = <IngredientDetails item={item} />;
-    openModal('', childModal);
-  }
+export default function IngredientCard({ id, name, price, image, openModal, ...props }) {
+  // function onClick() {
+  //   const childModal = <IngredientDetails item={item} />;
+  //   openModal('', childModal);
+  // }
 
   return (
-    <div className={`${cardStyle.card} mb-8`} onClick={onClick}>
-      <img src={item.image} alt={item.name} />
+    <div className={`${cardStyle.card} mb-8`} /*onClick={onClick}*/>
+      <img src={image} alt={name} />
       <div className={`${cardStyle.price} mt-1`}>
-        <p className="text text_type_main-default">{item.price}</p>
+        <p className="text text_type_main-default">{price}</p>
         <CurrencyIcon />
       </div>
       <p className={`${cardStyle.name} text text_type_main-default mt-1`}>
-        {item.name}
+        {name}
       </p>
-      <Counter />
+      <Counter {...props} />
     </div>
   );
 }

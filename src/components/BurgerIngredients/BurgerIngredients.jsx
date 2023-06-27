@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ingredientStyles from "../BurgerIngredients/BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientCard from "../IngredientCard/IngredientCard";
 import { data } from "../../utils/data";
 import PropTypes from "prop-types";
-import { ingredientPropType } from '../../utils/prop-types'
+import { ingredientPropType } from "../../utils/prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToConstructor,
+  loadIngredients,
+  removeFromConstructor,
+  selectIngredients,
+} from "../../services/BurgerSlice";
 
-export default function BurgerIngredients({data, openModal}) {
+export default function BurgerIngredients({ openModal }) {
   const [current, setCurrent] = React.useState("bun");
-  const buns = data.filter((item) => item.type === "bun");
-  const sauces = data.filter((item) => item.type === "sauce");
-  const main = data.filter((item) => item.type === "main");
+
+  const dispatch = useDispatch();
+  const { items, loading } = useSelector(selectIngredients);
+  const buns = items.filter((item) => item.type === "bun");
+  const sauces = items.filter((item) => item.type === "sauce");
+  const main = items.filter((item) => item.type === "main");
+
+  useEffect(() => {
+    dispatch(loadIngredients());
+  }, []);
 
   return (
     <div className={`${ingredientStyles.ingredients} ml-4`}>
@@ -22,35 +36,52 @@ export default function BurgerIngredients({data, openModal}) {
         <Tab value="sauce" active={current === "sauce"} onClick={setCurrent}>
           Соусы
         </Tab>
-        <Tab
-          value="main"
-          active={current === "main"}
-          onClick={setCurrent}
-        >
+        <Tab value="main" active={current === "main"} onClick={setCurrent}>
           Начинки
         </Tab>
       </div>
       <section className={ingredientStyles.section}>
-        <h3 className="text text_type_main-medium mb-6 mt-10">Булки</h3>
-        <div className={ingredientStyles.cardList}>
-          {buns.map((item) => (
-            <IngredientCard item={item} key={item._id} openModal={openModal} />
-          ))}
-        </div>
+        {loading ? (
+          <p className="text text_type_main-medium">Ингредиенты загружаются</p>
+        ) : (
+          <>
+            <h3 className="text text_type_main-medium mb-6 mt-10">Булки</h3>
+            <div className={ingredientStyles.cardList}>
+              {buns.map((item) => (
+                <IngredientCard
+                  {...item}
+                  item={item}
+                  key={item._id}
+                  openModal={openModal}
+                />
+              ))}
+            </div>
 
-        <h3 className="text text_type_main-medium mb-6 mt-10">Соусы</h3>
-        <div className={ingredientStyles.cardList}>
-        {sauces.map((item) => (
-            <IngredientCard item={item} key={item._id} openModal={openModal} />
-          ))}
-        </div>
+            <h3 className="text text_type_main-medium mb-6 mt-10">Соусы</h3>
+            <div className={ingredientStyles.cardList}>
+              {sauces.map((item) => (
+                <IngredientCard
+                  {...item}
+                  item={item}
+                  key={item._id}
+                  openModal={openModal}
+                />
+              ))}
+            </div>
 
-        <h3 className="text text_type_main-medium mb-6 mt-10">Начинки</h3>
-        <div className={ingredientStyles.cardList}>
-        {main.map((item) => (
-            <IngredientCard item={item} key={item._id} openModal={openModal} />
-          ))}
-        </div>
+            <h3 className="text text_type_main-medium mb-6 mt-10">Начинки</h3>
+            <div className={ingredientStyles.cardList}>
+              {main.map((item) => (
+                <IngredientCard
+                  {...item}
+                  item={item}
+                  key={item._id}
+                  openModal={openModal}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </section>
     </div>
   );
@@ -59,4 +90,4 @@ export default function BurgerIngredients({data, openModal}) {
 BurgerIngredients.propTypes = {
   data: PropTypes.arrayOf(ingredientPropType),
   openModal: PropTypes.func,
-}
+};
