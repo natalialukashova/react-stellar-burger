@@ -14,7 +14,7 @@ import {
 } from "../../services/BurgerSlice";
 
 export default function BurgerIngredients({ openModal }) {
-  const [current, setCurrent] = React.useState("bun");
+  const [current, setCurrent] = React.useState();
 
   const dispatch = useDispatch();
   const { items, loading } = useSelector(selectIngredients);

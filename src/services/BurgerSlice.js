@@ -13,11 +13,13 @@ export const loadIngredients = createAsyncThunk(
   "counter/fetchCount",
   async () => {
     const response = await api.getIngredients();
-    return response.map((item) => {
-      Object.assign({}, item, {
-        counter: 0,
-      });
-    });
+    console.log(response)
+    // return response.map((item) => {
+    //   Object.assign({}, item, {
+    //     counter: 0,
+    //   });
+    // });
+    return response.data;
   }
 );
 

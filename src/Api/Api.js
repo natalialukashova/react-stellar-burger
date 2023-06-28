@@ -15,12 +15,12 @@ export class Api {
   }
 
   getIngredients = () => {
-    return fetch(`${this._baseUrl}/ingredients`, {
+    return fetch(`${this._baseUrl}${this._ingredients}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-    }).then(this.checkResponse);
+    }).then(this._checkResponse);
   };
 }
 
