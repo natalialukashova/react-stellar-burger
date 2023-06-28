@@ -13,7 +13,7 @@ export const loadIngredients = createAsyncThunk(
   "counter/fetchCount",
   async () => {
     const response = await api.getIngredients();
-    console.log(response)
+    console.log(response.data);
     // return response.map((item) => {
     //   Object.assign({}, item, {
     //     counter: 0,
@@ -57,7 +57,7 @@ export const { setConstuctor, setIngredient } = burgerSlice.actions;
 
 export const selectIngredients = (state) => ({
   items: state[SLICE].ingredients,
-  loading: (state[SLICE].status === "loading"),
+  loading: state[SLICE].status === "loading",
 });
 
 export const selectIngredient = (id) => (state) => {

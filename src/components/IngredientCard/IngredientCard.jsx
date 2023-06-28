@@ -9,13 +9,13 @@ import PropTypes from "prop-types";
 import { ingredientPropType } from '../../utils/prop-types'
 
 export default function IngredientCard({ id, name, price, image, openModal, ...props }) {
-  // function onClick() {
-  //   const childModal = <IngredientDetails item={item} />;
-  //   openModal('', childModal);
-  // }
+  function onClick() {
+    const childModal = <IngredientDetails name={name} {...props}  />;
+    openModal('', childModal);
+  }
 
   return (
-    <div className={`${cardStyle.card} mb-8`} /*onClick={onClick}*/>
+    <div className={`${cardStyle.card} mb-8`} onClick={onClick}>
       <img src={image} alt={name} />
       <div className={`${cardStyle.price} mt-1`}>
         <p className="text text_type_main-default">{price}</p>
