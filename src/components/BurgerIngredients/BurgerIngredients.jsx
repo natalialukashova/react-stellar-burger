@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import ingredientStyles from "../BurgerIngredients/BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientCard from "../IngredientCard/IngredientCard";
@@ -15,9 +15,12 @@ import {
 
 export default function BurgerIngredients({ openModal }) {
   const [current, setCurrent] = React.useState();
-
   const dispatch = useDispatch();
   const { items, loading } = useSelector(selectIngredients);
+  const bunsRef = useRef(null);
+  const saucesRef = useRef(null);
+  const mainsRef = useRef(null);
+
   const buns = items.filter((item) => item.type === "bun");
   const sauces = items.filter((item) => item.type === "sauce");
   const main = items.filter((item) => item.type === "main");
@@ -26,26 +29,47 @@ export default function BurgerIngredients({ openModal }) {
     dispatch(loadIngredients());
   }, []);
 
+  function scrollToBuns() {
+    setCurrent();
+    bunsRef.current.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+  function scrollToSauces() {
+    setCurrent();
+    saucesRef.current.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+  function scrollToMains() {
+    setCurrent();
+    mainsRef.current.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+
   return (
     <div className={`${ingredientStyles.ingredients} ml-4`}>
       <h2 className="text text_type_main-large mt-10">Соберите бургер</h2>
       <div className={`${ingredientStyles.tab} mt-5`}>
-        <Tab value="bun" active={current === "bun"} onClick={setCurrent}>
+        <Tab value="bun" active={current === "bun"} onClick={scrollToBuns}>
           Булки
         </Tab>
-        <Tab value="sauce" active={current === "sauce"} onClick={setCurrent}>
+        <Tab
+          value="sauce"
+          active={current === "sauce"}
+          onClick={scrollToSauces}
+        >
           Соусы
         </Tab>
-        <Tab value="main" active={current === "main"} onClick={setCurrent}>
+        <Tab value="main" active={current === "main"} onClick={scrollToMains}>
           Начинки
         </Tab>
       </div>
       <section className={ingredientStyles.section}>
         {loading ? (
-          <p className="text text_type_main-medium mt-4">Ингредиенты загружаются...</p>
+          <p className="text text_type_main-medium mt-4">
+            Ингредиенты загружаются...
+          </p>
         ) : (
           <>
-            <h3 className="text text_type_main-medium mb-6 mt-10">Булки</h3>
+            <h3 className="text text_type_main-medium mb-6 mt-10" ref={bunsRef}>
+              Булки
+            </h3>
             <div className={ingredientStyles.cardList}>
               {buns.map((item) => (
                 <IngredientCard
@@ -57,7 +81,12 @@ export default function BurgerIngredients({ openModal }) {
               ))}
             </div>
 
-            <h3 className="text text_type_main-medium mb-6 mt-10">Соусы</h3>
+            <h3
+              className="text text_type_main-medium mb-6 mt-10"
+              ref={saucesRef}
+            >
+              Соусы
+            </h3>
             <div className={ingredientStyles.cardList}>
               {sauces.map((item) => (
                 <IngredientCard
@@ -69,7 +98,12 @@ export default function BurgerIngredients({ openModal }) {
               ))}
             </div>
 
-            <h3 className="text text_type_main-medium mb-6 mt-10">Начинки</h3>
+            <h3
+              className="text text_type_main-medium mb-6 mt-10"
+              ref={mainsRef}
+            >
+              Начинки
+            </h3>
             <div className={ingredientStyles.cardList}>
               {main.map((item) => (
                 <IngredientCard

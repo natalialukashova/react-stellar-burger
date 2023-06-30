@@ -2,7 +2,14 @@ import React from "react";
 import detailsStyle from "../IngredientDetails/IngredientDetails.module.css";
 import { ingredientPropType } from "../../utils/prop-types";
 
-export default function IngredientDetails({ name, image_large, calories, proteins, fat, carbohydrates }) {
+export default function IngredientDetails({
+  name,
+  image_large,
+  calories,
+  proteins,
+  fat,
+  carbohydrates,
+}) {
   return (
     <div className={detailsStyle.section}>
       <p className="text text_type_main-large">Детали ингредиента</p>
@@ -11,15 +18,11 @@ export default function IngredientDetails({ name, image_large, calories, protein
         alt={name}
         className={`${detailsStyle.image} mr-5 ml-5`}
       />
-      <p
-        className={`${detailsStyle.name} text text_type_main-medium mt-4`}
-      >
+      <p className={`${detailsStyle.name} text text_type_main-medium mt-4`}>
         {name}
       </p>
 
-      <div
-        className={`${detailsStyle.info} text text_type_main-medium mt-4`}
-      >
+      <div className={`${detailsStyle.info} text text_type_main-medium mt-4`}>
         <div className={`${detailsStyle.detail} text_color_inactive`}>
           <p className="text text_type_main-default">Калории,ккал</p>
           <p className="text text_type_digits-default">{calories}</p>

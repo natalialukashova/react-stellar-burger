@@ -6,12 +6,19 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import PropTypes from "prop-types";
-import { ingredientPropType } from '../../utils/prop-types'
+import { ingredientPropType } from "../../utils/prop-types";
 
-export default function IngredientCard({ id, name, price, image, openModal, ...props }) {
+export default function IngredientCard({
+  id,
+  name,
+  price,
+  image,
+  openModal,
+  ...props
+}) {
   function onClick() {
-    const childModal = <IngredientDetails name={name} {...props}  />;
-    openModal('', childModal);
+    const childModal = <IngredientDetails name={name} {...props} />;
+    openModal("", childModal);
   }
 
   return (
