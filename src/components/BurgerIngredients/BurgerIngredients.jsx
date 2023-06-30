@@ -7,11 +7,9 @@ import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addToConstructor,
   loadIngredients,
-  removeFromConstructor,
   selectIngredients,
-} from "../../services/BurgerSlice";
+} from "../../services/IngredientSlice";
 
 export default function BurgerIngredients({ openModal }) {
   const [current, setCurrent] = React.useState();
@@ -31,15 +29,15 @@ export default function BurgerIngredients({ openModal }) {
 
   function scrollToBuns() {
     setCurrent();
-    bunsRef.current.scrollIntoView({ block: "center", behavior: "smooth" });
+    bunsRef.current.scrollIntoView({ behavior: "smooth" });
   }
   function scrollToSauces() {
     setCurrent();
-    saucesRef.current.scrollIntoView({ block: "center", behavior: "smooth" });
+    saucesRef.current.scrollIntoView({ behavior: "smooth" });
   }
   function scrollToMains() {
     setCurrent();
-    mainsRef.current.scrollIntoView({ block: "center", behavior: "smooth" });
+    mainsRef.current.scrollIntoView({ behavior: "smooth" });
   }
 
   return (
