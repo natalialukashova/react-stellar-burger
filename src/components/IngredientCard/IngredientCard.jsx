@@ -18,8 +18,9 @@ export default function IngredientCard({
 }) {
   function onClick() {
     const childModal = <IngredientDetails name={name} {...props} />;
-    openModal("", childModal);
+    openModal("", childModal); 
   }
+  // закрыть модалку, по клику добавлять в конструктор
 
   return (
     <div className={`${cardStyle.card} mb-8`} onClick={onClick}>

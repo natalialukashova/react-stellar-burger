@@ -27,34 +27,38 @@ export default function BurgerIngredients({ openModal }) {
     dispatch(loadIngredients());
   }, []);
 
-  function scrollToBuns() {
-    setCurrent();
-    bunsRef.current.scrollIntoView({ behavior: "smooth" });
-  }
-  function scrollToSauces() {
-    setCurrent();
-    saucesRef.current.scrollIntoView({ behavior: "smooth" });
-  }
-  function scrollToMains() {
-    setCurrent();
-    mainsRef.current.scrollIntoView({ behavior: "smooth" });
-  }
-
   return (
     <div className={`${ingredientStyles.ingredients} ml-4`}>
       <h2 className="text text_type_main-large mt-10">Соберите бургер</h2>
       <div className={`${ingredientStyles.tab} mt-5`}>
-        <Tab value="bun" active={current === "bun"} onClick={scrollToBuns}>
+        <Tab
+          value="bun"
+          active={current === "bun"}
+          onClick={() => {
+            setCurrent("bun");
+            bunsRef.current.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
           Булки
         </Tab>
         <Tab
           value="sauce"
           active={current === "sauce"}
-          onClick={scrollToSauces}
+          onClick={() => {
+            setCurrent("sauce");
+            saucesRef.current.scrollIntoView({ behavior: "smooth" });
+          }}
         >
           Соусы
         </Tab>
-        <Tab value="main" active={current === "main"} onClick={scrollToMains}>
+        <Tab
+          value="main"
+          active={current === "main"}
+          onClick={() => {
+            setCurrent("main");
+            mainsRef.current.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
           Начинки
         </Tab>
       </div>

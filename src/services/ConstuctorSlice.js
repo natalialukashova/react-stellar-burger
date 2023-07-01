@@ -4,7 +4,7 @@ const SLICE = 'constructor';
 const initialState = {
    constructor: {
       bun: [],
-      fillings: [],
+      fillings: [], // пихать каунты сюда
    },
    counts: {},
    totalPrice: 0,
