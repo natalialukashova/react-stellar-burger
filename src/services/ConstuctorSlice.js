@@ -36,7 +36,9 @@ export const constructorSlice = createSlice({
 export const { setBun, addFilling, removeFilling } = constructorSlice.actions;
 
 export const selectConstructorBuns = (state) => {
+   console.log(state[SLICE].burgerConstructor.bun)
    return state[SLICE].burgerConstructor.bun;
+   
 }
 
 export const selectConstructorIngredients = (state) => {

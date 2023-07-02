@@ -18,18 +18,19 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function BurgerConstructor({ openModal }) {
   const dispatch = useDispatch();
-  const { bun } = useSelector(selectConstructorBuns);
-  const { fillings } = useSelector(selectConstructorIngredients);
+  const bun = useSelector(selectConstructorBuns);
+  const fillings = useSelector(selectConstructorIngredients);
 
   function onClick() {
     const childModal = <OrderDetails order={"034536"} />;
     openModal(childModal);
   }
+  console.log(bun);
 
   return (
     <section className={`${constuctorStyle.content} mt-25 ml-4`}>
-      {bun.length === 0 && Object.key(fillings).length === 0 ? (
-        <p className="text text_type_digits-medium">
+      {Object.keys(bun).length === 0 && fillings.length === 0 ? (
+        <p className="text text_type_main-large mt-10">
           Перетащите ингредиенты и булки для составления бургера
         </p>
       ) : (
@@ -90,6 +91,5 @@ export default function BurgerConstructor({ openModal }) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropType),
   openModal: PropTypes.func,
 };

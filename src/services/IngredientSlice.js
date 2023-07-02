@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const loadIngredients = createAsyncThunk(
-  "counter/fetchCount",
+  "burger/fetchBurger",
   async () => {
     const response = await api.getIngredients();
     console.log(response.data);
