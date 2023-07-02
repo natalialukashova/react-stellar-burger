@@ -5,6 +5,6 @@ import constructorReducer from "../services/ConstuctorSlice";
 export const store = configureStore({
   reducer: {
     ingredients: ingredientsReducer,
-    burgerConstructor: constructorReducer,
+    burger: constructorReducer,
   },
 });
