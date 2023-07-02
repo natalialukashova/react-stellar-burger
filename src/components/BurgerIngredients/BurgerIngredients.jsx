@@ -10,9 +10,10 @@ import {
   loadIngredients,
   selectIngredients,
 } from "../../services/IngredientSlice";
+import { addFilling, setBun } from "../../services/ConstuctorSlice";
 
 export default function BurgerIngredients({ openModal }) {
-  const [current, setCurrent] = React.useState();
+  const [current, setCurrent] = React.useState('bun');
   const dispatch = useDispatch();
   const { items, loading } = useSelector(selectIngredients);
   const bunsRef = useRef(null);
@@ -79,6 +80,7 @@ export default function BurgerIngredients({ openModal }) {
                   item={item}
                   key={item._id}
                   openModal={openModal}
+                  onClick={() => dispatch(setBun(item))}
                 />
               ))}
             </div>
@@ -96,6 +98,7 @@ export default function BurgerIngredients({ openModal }) {
                   item={item}
                   key={item._id}
                   openModal={openModal}
+                  onClick={() => dispatch(addFilling(item))}
                 />
               ))}
             </div>
@@ -113,6 +116,7 @@ export default function BurgerIngredients({ openModal }) {
                   item={item}
                   key={item._id}
                   openModal={openModal}
+                  onClick={() => dispatch(addFilling(item))}
                 />
               ))}
             </div>

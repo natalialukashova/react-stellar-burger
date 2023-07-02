@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../Api/Api";
 
-const SLICE = "burger";
+const SLICE = "ingredients";
 const initialState = {
   ingredients: [],
   status: false,

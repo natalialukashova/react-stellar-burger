@@ -16,14 +16,14 @@ export default function IngredientCard({
   openModal,
   ...props
 }) {
-  function onClick() {
-    const childModal = <IngredientDetails name={name} {...props} />;
-    openModal("", childModal); 
-  }
+  // function onClick() {
+  //   const childModal = <IngredientDetails name={name} {...props} />;
+  //   openModal("", childModal); 
+  // }
   // закрыть модалку, по клику добавлять в конструктор
 
   return (
-    <div className={`${cardStyle.card} mb-8`} onClick={onClick}>
+    <div className={`${cardStyle.card} mb-8`}>
       <img src={image} alt={name} />
       <div className={`${cardStyle.price} mt-1`}>
         <p className="text text_type_main-default">{price}</p>
@@ -32,7 +32,7 @@ export default function IngredientCard({
       <p className={`${cardStyle.name} text text_type_main-default mt-1`}>
         {name}
       </p>
-      <Counter {...props} />
+      <Counter />
     </div>
   );
 }

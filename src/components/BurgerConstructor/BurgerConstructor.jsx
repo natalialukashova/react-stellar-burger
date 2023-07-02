@@ -9,10 +9,13 @@ import {
 import OrderDetails from "../OrderDetails/OrderDetails";
 import PropTypes from "prop-types";
 import { ingredientPropType } from '../../utils/prop-types'
+import { removeFilling, selectConstructorIngredients, selectConstructorBuns } from "../../services/ConstuctorSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function BurgerConstructor({ data, openModal }) {
-  const bunBurger = data.find((item) => item.type === "bun");
-  const withoutBuns = data.filter((item) => item.type !== "bun");
+export default function BurgerConstructor({ openModal }) {
+  const dispatch = useDispatch();
+  const { bun } = useSelector(selectConstructorBuns);
+  const { fillings } = useSelector(selectConstructorIngredients)
 
   function onClick() {
     const childModal = <OrderDetails order={"034536"} />;
@@ -24,31 +27,32 @@ export default function BurgerConstructor({ data, openModal }) {
       <ConstructorElement
         type="top"
         isLocked={true}
-        text="Краторная булка N-200i (верх)"
-        price={200}
-        thumbnail={bunBurger.image_mobile}
+        text={bun.text}
+        price={bun.price}
+        thumbnail={bun.image_mobile}
         className="ml-8"
       />
 
       <div className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}>
-        {withoutBuns.map((item) => (
+        {fillings.map((item, index) => (
           <div key={item._id} className={`${constuctorStyle.mainItem} pt-4`}>
             <DragIcon type="primary" />
             <ConstructorElement
               text={item.name}
               price={item.price}
               thumbnail={item.image_mobile}
+              handleClose={() => dispatch(removeFilling(index))}
             />
           </div>
         ))}
       </div>
 
       <ConstructorElement
-        type="bottom"
+        type="top"
         isLocked={true}
-        text="Краторная булка N-200i (низ)"
-        price={200}
-        thumbnail={bunBurger.image_mobile}
+        text={bun.text}
+        price={bun.price}
+        thumbnail={bun.image_mobile}
         className="ml-8"
       />
       <div className={`${constuctorStyle.footer} mt-10`}>
