@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import constuctorStyle from "../BurgerConstructor/BurgerConstructor.module.css";
 import {
   ConstructorElement,
@@ -25,13 +25,46 @@ export default function BurgerConstructor({ openModal }) {
     const childModal = <OrderDetails order={"034536"} />;
     openModal(childModal);
   }
+  //  суммировать все прайсы
+  // const totalPrice = fillings.reduce((acc, { price }) => {
+  //   acc = acc + price;
+  //   return acc;
+  // }, bun.price * 2);
+
+  const calculateTotal = (bun, fillings = []) =>
+    fillings.reduce((acc, { price }) => {
+      acc = acc + price;
+      return acc;
+    }, bun?.price * 2 ?? 0);
+
+  const totalPrice = React.useMemo(
+    () => calculateTotal(bun, fillings),
+    [bun, fillings]
+  );
 
   return (
     <section className={`${constuctorStyle.content} mt-25 ml-4`}>
       {Object.keys(bun).length === 0 && fillings.length === 0 ? (
-        <p className="text text_type_main-large mt-10">
-          Перетащите ингредиенты и булки для составления бургера
-        </p>
+        <>
+          <p className="text text_type_main-large mt-10 ml-4">
+            Перетащите ингредиенты и булки для составления бургера
+          </p>
+          <div className={`${constuctorStyle.footer} mt-10`}>
+            <div className={`${constuctorStyle.price} mr-10`}>
+              <p className="text text_type_digits-medium pr-3">0</p>
+              <CurrencyIcon type="primary" />
+            </div>
+            <Button
+              htmlType="button"
+              type="primary"
+              size="medium"
+              onClick={onClick}
+              disabled
+            >
+              Оформить заказ
+            </Button>
+          </div>
+        </>
       ) : (
         <>
           <ConstructorElement
@@ -68,23 +101,23 @@ export default function BurgerConstructor({ openModal }) {
             thumbnail={bun.image_mobile}
             className="ml-8"
           />
+
+          <div className={`${constuctorStyle.footer} mt-10`}>
+            <div className={`${constuctorStyle.price} mr-10`}>
+              <p className="text text_type_digits-medium pr-3">{totalPrice}</p>
+              <CurrencyIcon type="primary" />
+            </div>
+            <Button
+              htmlType="button"
+              type="primary"
+              size="medium"
+              onClick={onClick}
+            >
+              Оформить заказ
+            </Button>
+          </div>
         </>
       )}
-
-      <div className={`${constuctorStyle.footer} mt-10`}>
-        <div className={`${constuctorStyle.price} mr-10`}>
-          <p className="text text_type_digits-medium pr-3">610</p>
-          <CurrencyIcon type="primary" />
-        </div>
-        <Button
-          htmlType="button"
-          type="primary"
-          size="medium"
-          onClick={onClick}
-        >
-          Оформить заказ
-        </Button>
-      </div>
     </section>
   );
 }
