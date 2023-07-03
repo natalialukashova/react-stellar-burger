@@ -14,6 +14,7 @@ export default function IngredientCard({
   price,
   image,
   openModal,
+  onClick,
   ...props
 }) {
   // function onClick() {
@@ -23,7 +24,7 @@ export default function IngredientCard({
   // закрыть модалку, по клику добавлять в конструктор
 
   return (
-    <div className={`${cardStyle.card} mb-8`}>
+    <div className={`${cardStyle.card} mb-8`} onClick={onClick}>
       <img src={image} alt={name} />
       <div className={`${cardStyle.price} mt-1`}>
         <p className="text text_type_main-default">{price}</p>

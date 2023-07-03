@@ -16,8 +16,8 @@ export const constructorSlice = createSlice({
   reducers: {
     setBun: (state, action) => {
       state.burgerConstructor.bun = action.payload;
-    }, 
-   //  суммировать все прайсы
+    },
+    //  суммировать все прайсы
     addFilling: (state, action) => {
       state.burgerConstructor.fillings = [
         ...state.burgerConstructor.fillings,
@@ -36,13 +36,12 @@ export const constructorSlice = createSlice({
 export const { setBun, addFilling, removeFilling } = constructorSlice.actions;
 
 export const selectConstructorBuns = (state) => {
-   console.log(state[SLICE].burgerConstructor.bun)
-   return state[SLICE].burgerConstructor.bun;
-   
-}
+  console.log(state[SLICE].burgerConstructor.bun);
+  return state[SLICE].burgerConstructor.bun;
+};
 
 export const selectConstructorIngredients = (state) => {
-   return state[SLICE].burgerConstructor.fillings;
-}
+  return state[SLICE].burgerConstructor.fillings;
+};
 
 export default constructorSlice.reducer;

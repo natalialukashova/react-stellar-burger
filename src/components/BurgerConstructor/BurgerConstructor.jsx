@@ -25,7 +25,6 @@ export default function BurgerConstructor({ openModal }) {
     const childModal = <OrderDetails order={"034536"} />;
     openModal(childModal);
   }
-  console.log(bun);
 
   return (
     <section className={`${constuctorStyle.content} mt-25 ml-4`}>
@@ -38,7 +37,7 @@ export default function BurgerConstructor({ openModal }) {
           <ConstructorElement
             type="top"
             isLocked={true}
-            text={bun.text}
+            text={bun.name}
             price={bun.price}
             thumbnail={bun.image_mobile}
             className="ml-8"
@@ -62,9 +61,9 @@ export default function BurgerConstructor({ openModal }) {
           </div>
 
           <ConstructorElement
-            type="top"
+            type="bottom"
             isLocked={true}
-            text={bun.text}
+            text={bun.name}
             price={bun.price}
             thumbnail={bun.image_mobile}
             className="ml-8"
