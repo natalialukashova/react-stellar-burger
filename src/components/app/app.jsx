@@ -8,6 +8,7 @@ import { api, config } from "../../Api/Api";
 import Modal from "../Modal/Modal";
 import { useSelector } from "react-redux";
 import { selectOrder } from "../../services/ConstuctorSlice";
+import OrderDetails from "../OrderDetails/OrderDetails";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -40,8 +41,8 @@ function App() {
       <AppHeader />
       <Main data={data} openModal={openModal} />
       {order && (
-        <Modal headerModal='' closeModal={closeModal}>
-        <OrderDetails order={order} />
+        <Modal headerModal="" closeModal={closeModal}>
+          <OrderDetails order={order} />
         </Modal>
       )}
     </div>
