@@ -1,8 +1,8 @@
 export class Api {
-  constructor({ baseUrl, ingredients, order }) {
+  constructor({ baseUrl, ingredients, orders }) {
     this._baseUrl = baseUrl;
     this._ingredients = ingredients;
-    this._order = order;
+    this._orders = orders;
   }
 
   _checkResponse(res) {
@@ -25,7 +25,7 @@ export class Api {
   };
 
   getOrderDetails = (ingredientsList) => {
-    return fetch(`${this._baseUrl}${this._order}`, {
+    return fetch(`${this._baseUrl}${this._orders}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,7 @@ export class Api {
 const config = {
   baseUrl: "https://norma.nomoreparties.space/api",
   ingredients: "/ingredients",
-  order: "/order",
+  order: "/orders",
 };
 
 const api = new Api(config);
