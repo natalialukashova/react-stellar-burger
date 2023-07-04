@@ -1,8 +1,8 @@
 export class Api {
-  constructor({ baseUrl, ingredients, orders }) {
+  constructor({ baseUrl, ingredients, order }) {
     this._baseUrl = baseUrl;
     this._ingredients = ingredients;
-    this._orders = orders;
+    this._order = order;
   }
 
   _checkResponse(res) {
@@ -25,7 +25,7 @@ export class Api {
   };
 
   getOrderDetails = (ingredientsList) => {
-    return fetch(`${this._baseUrl}${this._orders}`, {
+    return fetch(`${this._baseUrl}${this._order}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
