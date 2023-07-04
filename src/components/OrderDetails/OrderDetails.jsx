@@ -3,7 +3,7 @@ import orderStyles from "../OrderDetails/OrderDetails.module.css";
 import done from "../../images/done.svg";
 import PropTypes from "prop-types";
 
-export default function OrderDetails({ order }) {
+export default function OrderDetails(order) {
   return (
     <div className={`${orderStyles.section} `}>
       <p className={`${orderStyles.number} text_type_digits-large `}>{order}</p>

@@ -27,12 +27,11 @@ export default function BurgerConstructor({ openModal }) {
   const orderNum = async (ingredients) => {
     const res = await api.getOrderDetails(ingredients);
     const orderNumber = res.order.number;
-    console.dir(orderNum)
+    console.dir(orderNumber)
   };
 
   function onClick() {
-    const childModal = <OrderDetails order={"034536"} />;
-    orderNum(ingredientsList);
+    const childModal = <OrderDetails order={orderNum(ingredientsList)} />;
     openModal(childModal);
   }
   //  суммировать все прайсы
