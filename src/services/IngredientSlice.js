@@ -5,6 +5,7 @@ const SLICE = "ingredients";
 const initialState = {
   ingredients: [],
   status: false,
+  selectedIndredient: null,
 };
 
 export const loadIngredients = createAsyncThunk(
@@ -28,10 +29,10 @@ export const ingredientSlice = createSlice({
         }
       });
     },
-    // setConstuctor: (state, action) => {
-    //   state.constructor = action.payload.items;
-    //   state.total = action.payload.total;
-    // },
+    selectIngredient: (state, action) => {
+      state.selectedIndredient = action.payload
+    },
+    clearIngredient: (state) => ({ ...state, selectedIndredient: null }),
   },
   extraReducers: (builder) => {
     builder
