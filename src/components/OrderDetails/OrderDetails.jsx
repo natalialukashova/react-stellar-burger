@@ -4,11 +4,13 @@ import done from "../../images/done.svg";
 import PropTypes from "prop-types";
 
 export default function OrderDetails({order}) {
-  console.log(order)
+  const orderNumber = order.order.number;
+  const name = order.name;
+
   return (
     <div className={`${orderStyles.section} `}>
-      <p className={`${orderStyles.number} text_type_digits-large `}>{order.order.number}</p>
-      <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
+      <p className={`${orderStyles.number} text_type_digits-large `}>{orderNumber}</p>
+      <p className="text text_type_main-medium mt-8">{name}</p>
       <img src={done} className={`${orderStyles.done}  mt-15`}></img>
       <p className="text text_type_main-default mt-15">
         Ваш заказ начали готовить
