@@ -43,6 +43,9 @@ export const constructorSlice = createSlice({
           return index !== action.payload;
         });
     },
+    setOrder: (state) => {
+      return state.order;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(sendOrder.fulfilled, (state, action) => {
