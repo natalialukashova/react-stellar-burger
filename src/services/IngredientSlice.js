@@ -29,7 +29,7 @@ export const ingredientSlice = createSlice({
         }
       });
     },
-    clickedIngredient: (state, action) => ({
+    clickIngredient: (state, action) => ({
       ...state,
       selectedIngredient: action.payload,
     }),
@@ -47,7 +47,7 @@ export const ingredientSlice = createSlice({
   },
 });
 
-export const { setIngredient, clickedIngredient, clearIngredient } = ingredientSlice.actions;
+export const { setIngredient, clickIngredient, clearIngredient } = ingredientSlice.actions;
 
 export const selectIngredients = (state) => ({
   items: state[SLICE].ingredients,

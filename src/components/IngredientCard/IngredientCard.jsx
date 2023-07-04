@@ -21,10 +21,10 @@ export default function IngredientCard({
   onClick,
   ...props
 }) {
-  // function onClick() {
-  //   const childModal = <IngredientDetails name={name} {...props} />;
-  //   openModal("", childModal);
-  // }
+  function onClick() {
+    const childModal = <IngredientDetails name={name} {...props} />;
+    openModal("", childModal);
+  }
   // закрыть модалку, по клику добавлять в конструктор
 
   const bun = useSelector(selectConstructorBuns);

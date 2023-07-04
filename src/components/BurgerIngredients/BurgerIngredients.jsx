@@ -10,6 +10,7 @@ import {
   selectIngredients,
 } from "../../services/IngredientSlice";
 import { addFilling, setBun } from "../../services/ConstuctorSlice";
+import { clickIngredient } from "../../services/IngredientSlice";
 
 export default function BurgerIngredients({ openModal }) {
   const [current, setCurrent] = React.useState('bun');
@@ -79,7 +80,8 @@ export default function BurgerIngredients({ openModal }) {
                   item={item}
                   key={item._id}
                   openModal={openModal}
-                  onClick={() => dispatch(setBun(item))}
+                  /*onClick={() => dispatch(setBun(item))}*/
+                  onClick={dispatch(clickIngredient(item))}
                 />
               ))}
             </div>
@@ -97,7 +99,7 @@ export default function BurgerIngredients({ openModal }) {
                   item={item}
                   key={item._id}
                   openModal={openModal}
-                  onClick={() => dispatch(addFilling(item))}
+                  /*onClick={() => dispatch(addFilling(item))}*/
                 />
               ))}
             </div>
@@ -115,7 +117,7 @@ export default function BurgerIngredients({ openModal }) {
                   item={item}
                   key={item._id}
                   openModal={openModal}
-                  onClick={() => dispatch(addFilling(item))}
+                  /*onClick={() => dispatch(addFilling(item))}*/
                 />
               ))}
             </div>

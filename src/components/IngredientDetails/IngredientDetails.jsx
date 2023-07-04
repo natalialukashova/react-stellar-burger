@@ -2,14 +2,14 @@ import React from "react";
 import detailsStyle from "../IngredientDetails/IngredientDetails.module.css";
 import { ingredientPropType } from "../../utils/prop-types";
 
-export default function IngredientDetails({
+export default function IngredientDetails({ ingredient: {
   name,
   image_large,
   calories,
   proteins,
   fat,
   carbohydrates,
-}) {
+}}) {
   return (
     <div className={detailsStyle.section}>
       <p className="text text_type_main-large">Детали ингредиента</p>

@@ -59,7 +59,7 @@ function App() {
       )}
       {clickedIngredient && (
         <Modal headerModal="" closeModal={closeIngredientModal} >
-          <IngredientDetails  />
+          <IngredientDetails ingredient={clickedIngredient}  />
         </Modal>
       )}
     </div>
