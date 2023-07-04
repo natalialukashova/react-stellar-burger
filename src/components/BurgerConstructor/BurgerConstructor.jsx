@@ -15,14 +15,24 @@ import {
   selectConstructorBuns,
 } from "../../services/ConstuctorSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { api } from "../../Api/Api";
 
 export default function BurgerConstructor({ openModal }) {
   const dispatch = useDispatch();
   const bun = useSelector(selectConstructorBuns);
   const fillings = useSelector(selectConstructorIngredients);
+  const ingredientsList = fillings.map(item => item._id);
+  ingredientsList.unshift(bun._id);
+
+  const order = async (ingredientsList) => {
+    const res = await api.getOrderDetails(ingredientsList);
+    console.dir(res);
+  }
 
   function onClick() {
     const childModal = <OrderDetails order={"034536"} />;
+    order(ingredientsList);
+    console.dir(order(ingredientsList));
     openModal(childModal);
   }
   //  суммировать все прайсы
@@ -58,7 +68,6 @@ export default function BurgerConstructor({ openModal }) {
               htmlType="button"
               type="primary"
               size="medium"
-              onClick={onClick}
               disabled
             >
               Оформить заказ

@@ -6,7 +6,6 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import PropTypes from "prop-types";
-import { ingredientPropType } from "../../utils/prop-types";
 import { useSelector } from "react-redux";
 import {
   selectConstructorBuns,
@@ -50,12 +49,6 @@ export default function IngredientCard({
       </p>
       <Counter
         count={count({
-          id,
-          name,
-          price,
-          image,
-          openModal,
-          onClick,
           ...props,
         })}
       />

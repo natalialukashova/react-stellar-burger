@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import ingredientStyles from "../BurgerIngredients/BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientCard from "../IngredientCard/IngredientCard";
-import { data } from "../../utils/data";
 import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types";
 import { useDispatch, useSelector } from "react-redux";
