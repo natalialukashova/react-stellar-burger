@@ -76,7 +76,7 @@ export default function BurgerIngredients({ openModal }) {
             <div className={ingredientStyles.cardList}>
               {buns.map((item) => (
                 <IngredientCard
-                  item={item}
+                  ingredient={item}
                   key={item._id}
                   /*onClick={() => dispatch(setBun(item))}*/
                 />
@@ -92,7 +92,7 @@ export default function BurgerIngredients({ openModal }) {
             <div className={ingredientStyles.cardList}>
               {sauces.map((item) => (
                 <IngredientCard
-                  item={item}
+                  ingredient={item}
                   key={item._id}
                   /*onClick={() => dispatch(addFilling(item))}*/
                 />
@@ -108,7 +108,7 @@ export default function BurgerIngredients({ openModal }) {
             <div className={ingredientStyles.cardList}>
               {main.map((item) => (
                 <IngredientCard
-                  item={item}
+                  ingredient={item}
                   key={item._id}
                   /*onClick={() => dispatch(addFilling(item))}*/
                 />

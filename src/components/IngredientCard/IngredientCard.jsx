@@ -15,7 +15,7 @@ import { clickIngredient } from "../../services/IngredientSlice";
 
 export default function IngredientCard(ingredient) {
   const dispatch = useDispatch();
-  const { name, price, image, ...props } = ingredient;
+  const { image, name, price } = ingredient;
 
   function onClick() {
     dispatch(clickIngredient(ingredient));
@@ -42,11 +42,7 @@ export default function IngredientCard(ingredient) {
       <p className={`${cardStyle.name} text text_type_main-default mt-1`}>
         {name}
       </p>
-      <Counter
-        count={count({
-          ...props,
-        })}
-      />
+      <Counter count={count(ingredient)} />
     </div>
   );
 }
