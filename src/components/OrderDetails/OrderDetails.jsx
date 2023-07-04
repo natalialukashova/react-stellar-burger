@@ -10,7 +10,7 @@ export default function OrderDetails({order}) {
   return (
     <div className={`${orderStyles.section} `}>
       <p className={`${orderStyles.number} text_type_digits-large `}>{orderNumber}</p>
-      <p className="text text_type_main-medium mt-8">{name}</p>
+      <p className={`${orderStyles.name} text text_type_main-medium mt-8`}>{name}</p>
       <img src={done} className={`${orderStyles.done}  mt-15`}></img>
       <p className="text text_type_main-default mt-15">
         Ваш заказ начали готовить

@@ -17,7 +17,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { sendOrder } from "../../services/ConstuctorSlice";
 
-export default function BurgerConstructor({ openModal }) {
+export default function BurgerConstructor() {
   const dispatch = useDispatch();
   const bun = useSelector(selectConstructorBuns);
   const fillings = useSelector(selectConstructorIngredients);
