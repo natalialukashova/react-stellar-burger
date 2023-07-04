@@ -45,15 +45,13 @@ export const constructorSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-    .addCase(sendOrder.fulfilled, (state, action) => {
+    builder.addCase(sendOrder.fulfilled, (state, action) => {
       if (!action.payload) {
         return state;
       }
       state.order = action.payload;
-    })
-  }, 
-  }
+    });
+  },
 });
 
 export const { setBun, addFilling, removeFilling } = constructorSlice.actions;
