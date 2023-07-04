@@ -6,12 +6,15 @@ import Main from "../Main/Main";
 import { useEffect, useState } from "react";
 import { api, config } from "../../Api/Api";
 import Modal from "../Modal/Modal";
+import { useSelector } from "react-redux";
+import { selectOrder } from "../../services/ConstuctorSlice";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [headerModal, setheaderModal] = React.useState("");
   const [childModal, setChildModal] = React.useState("");
+  const order = useSelector(selectOrder);
 
   function openModal(modalHeaderName = "", mainModal) {
     setChildModal(mainModal);
@@ -36,9 +39,9 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <Main data={data} openModal={openModal} />
-      {isModalOpen && (
-        <Modal headerModal={headerModal} closeModal={closeModal}>
-          {childModal}
+      {order && (
+        <Modal headerModal='' closeModal={closeModal}>
+        <OrderDetails order={order} />
         </Modal>
       )}
     </div>
