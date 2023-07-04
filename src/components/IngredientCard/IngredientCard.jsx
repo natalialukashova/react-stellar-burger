@@ -6,24 +6,29 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   selectConstructorBuns,
   selectConstructorIngredients,
 } from "../../services/ConstuctorSlice";
+import { clickIngredient } from "../../services/IngredientSlice";
 
 export default function IngredientCard({
-  id,
-  name,
-  price,
-  image,
-  openModal,
-  onClick,
-  ...props
+  ingredient: { id, name, price, image, onClick, ...props },
 }) {
+  const dispatch = useDispatch();
+
   function onClick() {
-    const childModal = <IngredientDetails name={name} {...props} />;
-    openModal("", childModal);
+    dispatch(
+      clickIngredient({
+        id,
+        name,
+        price,
+        image,
+        onClick,
+        ...props,
+      })
+    );
   }
   // закрыть модалку, по клику добавлять в конструктор
 

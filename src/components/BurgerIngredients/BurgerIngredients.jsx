@@ -76,12 +76,9 @@ export default function BurgerIngredients({ openModal }) {
             <div className={ingredientStyles.cardList}>
               {buns.map((item) => (
                 <IngredientCard
-                  {...item}
                   item={item}
                   key={item._id}
-                  openModal={openModal}
                   /*onClick={() => dispatch(setBun(item))}*/
-                  onClick={dispatch(clickIngredient(item))}
                 />
               ))}
             </div>
