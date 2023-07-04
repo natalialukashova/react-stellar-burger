@@ -11,11 +11,6 @@ export const loadIngredients = createAsyncThunk(
   "burger/fetchBurger",
   async () => {
     const response = await api.getIngredients();
-    // return response.map((item) => {
-    //   Object.assign({}, item, {
-    //     counter: 0,
-    //   });
-    // });
     return response.data;
   }
 );

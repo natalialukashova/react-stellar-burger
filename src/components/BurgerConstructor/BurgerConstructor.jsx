@@ -24,14 +24,9 @@ export default function BurgerConstructor({ openModal }) {
   const ingredientsList = fillings.map((item) => item._id);
   ingredientsList.unshift(bun._id);
 
-  const orderNum = async (ingredients) => {
-    const res = await api.getOrderDetails(ingredients);
-    const orderNumber = res.order.number;
-    console.dir(orderNumber)
-  };
 
-  function onClick() {
-    const childModal = <OrderDetails order={orderNum(ingredientsList)} />;
+  async function onClick() {
+    const childModal = <OrderDetails order={await orderNum(ingredientsList)} />;
     openModal(childModal);
   }
   //  суммировать все прайсы

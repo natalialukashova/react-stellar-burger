@@ -7,7 +7,21 @@ const initialState = {
     bun: {},
     fillings: [], // пихать каунты сюда
   },
+  order: null,
 };
+
+const sendOrder = createAsyncThunk(
+  "order/fetchOrder",
+  async (ingredients) => {
+    try {
+      const res = await api.getOrderDetails(ingredients);
+      return res;
+    } catch (err) {
+      const { message } = err;
+      rejectWithValue(message);
+    }
+  }
+);
 
 export const constructorSlice = createSlice({
   name: SLICE,
@@ -29,6 +43,12 @@ export const constructorSlice = createSlice({
         });
     },
   },
+  extraReducers: (sendOrder.fulfilled) = (state, action) => {
+    if (!action.payload) {
+      return state;
+    }
+    state.order = action.payload;
+  }
 });
 
 export const { setBun, addFilling, removeFilling } = constructorSlice.actions;
