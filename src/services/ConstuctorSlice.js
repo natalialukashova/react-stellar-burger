@@ -43,9 +43,6 @@ export const constructorSlice = createSlice({
           return index !== action.payload;
         });
     },
-    setOrder: (state) => {
-      return state.order;
-    }
   },
   extraReducers: (builder) => {
     builder.addCase(sendOrder.fulfilled, (state, action) => {
@@ -66,5 +63,9 @@ export const selectConstructorBuns = (state) => {
 export const selectConstructorIngredients = (state) => {
   return state[SLICE].burgerConstructor.fillings;
 };
+
+export const selectorder = (state) => {
+  return state[SLICE].order;
+}
 
 export default constructorSlice.reducer;
