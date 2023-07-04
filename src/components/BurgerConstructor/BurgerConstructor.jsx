@@ -21,18 +21,18 @@ export default function BurgerConstructor({ openModal }) {
   const dispatch = useDispatch();
   const bun = useSelector(selectConstructorBuns);
   const fillings = useSelector(selectConstructorIngredients);
-  const ingredientsList = fillings.map(item => item._id);
+  const ingredientsList = fillings.map((item) => item._id);
   ingredientsList.unshift(bun._id);
 
-  const order = async (ingredientsList) => {
-    const res = await api.getOrderDetails(ingredientsList);
-    console.dir(res);
-  }
+  const orderNum = async (ingredients) => {
+    const res = await api.getOrderDetails(ingredients);
+    const orderNumber = res.order.number;
+    console.dir(orderNum)
+  };
 
   function onClick() {
     const childModal = <OrderDetails order={"034536"} />;
-    order(ingredientsList);
-    console.dir(order(ingredientsList));
+    orderNum(ingredientsList);
     openModal(childModal);
   }
   //  суммировать все прайсы
@@ -64,12 +64,7 @@ export default function BurgerConstructor({ openModal }) {
               <p className="text text_type_digits-medium pr-3">0</p>
               <CurrencyIcon type="primary" />
             </div>
-            <Button
-              htmlType="button"
-              type="primary"
-              size="medium"
-              disabled
-            >
+            <Button htmlType="button" type="primary" size="medium" disabled>
               Оформить заказ
             </Button>
           </div>

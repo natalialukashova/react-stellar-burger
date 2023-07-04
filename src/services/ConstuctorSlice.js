@@ -7,7 +7,6 @@ const initialState = {
     bun: {},
     fillings: [], // пихать каунты сюда
   },
-  orderNumber: null,
 };
 
 export const constructorSlice = createSlice({
