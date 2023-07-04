@@ -13,22 +13,12 @@ import {
 } from "../../services/ConstuctorSlice";
 import { clickIngredient } from "../../services/IngredientSlice";
 
-export default function IngredientCard({
-  ingredient: { id, name, price, image, onClick, ...props },
-}) {
+export default function IngredientCard(ingredient) {
   const dispatch = useDispatch();
+  const { name, price, image, ...props } = ingredient;
 
   function onClick() {
-    dispatch(
-      clickIngredient({
-        id,
-        name,
-        price,
-        image,
-        onClick,
-        ...props,
-      })
-    );
+    dispatch(clickIngredient(ingredient));
   }
   // закрыть модалку, по клику добавлять в конструктор
 
