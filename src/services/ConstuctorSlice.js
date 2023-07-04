@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { selectIngredient, setIngredient } from "./IngredientSlice";
+import { api } from "../Api/Api";
 
 const SLICE = "burger";
 const initialState = {
@@ -12,7 +13,7 @@ const initialState = {
 
 const sendOrder = createAsyncThunk(
   "order/fetchOrder",
-  async (ingredients) => {
+  async (ingredients, { rejectWithValue }) => {
     try {
       const res = await api.getOrderDetails(ingredients);
       return res;
@@ -43,11 +44,15 @@ export const constructorSlice = createSlice({
         });
     },
   },
-  extraReducers: (sendOrder.fulfilled) = (state, action) => {
-    if (!action.payload) {
-      return state;
-    }
-    state.order = action.payload;
+  extraReducers: (builder) => {
+    builder
+    .addCase(sendOrder.fulfilled, (state, action) => {
+      if (!action.payload) {
+        return state;
+      }
+      state.order = action.payload;
+    })
+  }, 
   }
 });
 

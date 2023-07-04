@@ -26,7 +26,7 @@ export default function BurgerConstructor({ openModal }) {
 
 
   async function onClick() {
-    const childModal = <OrderDetails order={await orderNum(ingredientsList)} />;
+    const childModal = <OrderDetails /*order={await orderNum(ingredientsList)}*/ />;
     openModal(childModal);
   }
   //  суммировать все прайсы
