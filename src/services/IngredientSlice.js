@@ -5,7 +5,7 @@ const SLICE = "ingredients";
 const initialState = {
   ingredients: [],
   status: false,
-  selectedIndredient: null,
+  selectedIngredient: null,
 };
 
 export const loadIngredients = createAsyncThunk(
@@ -29,10 +29,11 @@ export const ingredientSlice = createSlice({
         }
       });
     },
-    selectIngredient: (state, action) => {
-      state.selectedIndredient = action.payload
-    },
-    clearIngredient: (state) => ({ ...state, selectedIndredient: null }),
+    clickedIngredient: (state, action) => ({
+      ...state,
+      selectedIngredient: action.payload,
+    }),
+    clearIngredient: (state) => ({ ...state, selectedIngredient: null }),
   },
   extraReducers: (builder) => {
     builder
@@ -46,7 +47,7 @@ export const ingredientSlice = createSlice({
   },
 });
 
-export const { setIngredient } = ingredientSlice.actions;
+export const { setIngredient, clickedIngredient, clearIngredient } = ingredientSlice.actions;
 
 export const selectIngredients = (state) => ({
   items: state[SLICE].ingredients,
@@ -55,6 +56,10 @@ export const selectIngredients = (state) => ({
 
 export const selectIngredient = (id) => (state) => {
   return state[SLICE].ingredients.filter((item) => item.id === id).pop();
+};
+
+export const selectedIngredient = (state) => {
+  return state[SLICE].selectedIngredient;
 };
 
 export default ingredientSlice.reducer;

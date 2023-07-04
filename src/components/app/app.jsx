@@ -10,6 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectOrder } from "../../services/ConstuctorSlice";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import { clearOrder } from "../../services/ConstuctorSlice";
+import { selectedIngredient } from "../../services/IngredientSlice";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import { clearIngredient } from "../../services/IngredientSlice";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -17,7 +20,10 @@ function App() {
   const [headerModal, setheaderModal] = React.useState("");
   const [childModal, setChildModal] = React.useState("");
   const order = useSelector(selectOrder);
+  const clickedIngredient = useSelector(selectedIngredient)
   const dispatch = useDispatch();
+
+  console.log(clickedIngredient)
 
   function openModal(modalHeaderName = "", mainModal) {
     setChildModal(mainModal);
@@ -28,6 +34,10 @@ function App() {
   const closeOrderModal = React.useCallback(() => {
     dispatch(clearOrder())
   }, []);
+
+  const closeIngredientModal = React.useCallback(() => {
+    dispatch(clearIngredient())
+  })
 
   useEffect(() => {
     api
@@ -45,6 +55,11 @@ function App() {
       {order && (
         <Modal headerModal="" closeModal={closeOrderModal}>
           <OrderDetails order={order} />
+        </Modal>
+      )}
+      {clickedIngredient && (
+        <Modal headerModal="" closeModal={closeIngredientModal} >
+          <IngredientDetails  />
         </Modal>
       )}
     </div>
