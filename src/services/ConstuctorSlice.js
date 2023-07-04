@@ -11,7 +11,7 @@ const initialState = {
   order: null,
 };
 
-const sendOrder = createAsyncThunk(
+export const sendOrder = createAsyncThunk(
   "order/fetchOrder",
   async (ingredients, { rejectWithValue }) => {
     try {
@@ -49,7 +49,7 @@ export const constructorSlice = createSlice({
       if (!action.payload) {
         return state;
       }
-      state.order = action.payload;
+      return { ...state, order: action.payload };
     });
   },
 });

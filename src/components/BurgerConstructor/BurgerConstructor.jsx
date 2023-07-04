@@ -15,7 +15,7 @@ import {
   selectConstructorBuns,
 } from "../../services/ConstuctorSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { api } from "../../Api/Api";
+import { sendOrder } from "../../services/ConstuctorSlice";
 
 export default function BurgerConstructor({ openModal }) {
   const dispatch = useDispatch();
@@ -25,15 +25,9 @@ export default function BurgerConstructor({ openModal }) {
   ingredientsList.unshift(bun._id);
 
 
-  async function onClick() {
-    const childModal = <OrderDetails /*order={await orderNum(ingredientsList)}*/ />;
-    openModal(childModal);
+  function onClick() {
+    dispatch(sendOrder(ingredientsList));
   }
-  //  суммировать все прайсы
-  // const totalPrice = fillings.reduce((acc, { price }) => {
-  //   acc = acc + price;
-  //   return acc;
-  // }, bun.price * 2);
 
   const calculateTotal = (bun, fillings = []) =>
     fillings.reduce((acc, { price }) => {
