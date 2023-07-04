@@ -64,7 +64,7 @@ export const selectConstructorIngredients = (state) => {
   return state[SLICE].burgerConstructor.fillings;
 };
 
-export const selectorder = (state) => {
+export const selectOrder = (state) => {
   return state[SLICE].order;
 }
 
