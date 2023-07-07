@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import constuctorStyle from "../BurgerConstructor/BurgerConstructor.module.css";
 import {
   ConstructorElement,
@@ -23,6 +23,9 @@ export default function BurgerConstructor() {
   const dispatch = useDispatch();
   const bun = useSelector(selectConstructorBuns);
   const fillings = useSelector(selectConstructorIngredients);
+  const [currentItem, setCurrentItem] = useState(null);
+  const [fillingsList, setFillingsList] = useState()
+
   const ingredientsList = fillings.map((item) => item._id);
   ingredientsList.unshift(bun._id);
 
@@ -54,6 +57,38 @@ export default function BurgerConstructor() {
     }
   });
 
+  function dragStartHandler (evt, item) {
+    setCurrentItem(item);
+  }
+
+  function dragEndHandler (evt) {}
+
+  function dragOverHandler (evt) {
+    evt.preventDefault();
+
+  }
+
+  function dropHandler (evt, item) {
+    evt.preventDefault();
+    setFillingsList(ingredientsList.map(i => {
+      if (i._id === item._id) {
+        return {...i, id: currentItem.id}
+      }
+      if (i._id === currentItem._id) {
+        return {...i, id: item.id}
+      }
+      return i;
+    }))
+  }
+
+  const sortFillings = (a, b) => {
+    if (a.id > b.id) {
+      return 1;
+    } else {
+      return -1;
+    }
+  }
+
   return (
     <section className={`${constuctorStyle.content} mt-25 ml-4`} ref={dropBox}>
       {Object.keys(bun).length === 0 && fillings.length === 0 ? (
@@ -83,10 +118,16 @@ export default function BurgerConstructor() {
           />
 
           <div className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}>
-            {fillings.map((item, index) => (
+            {fillings.sort(sortFillings).map((item, index) => (
               <div
                 key={item._id}
                 className={`${constuctorStyle.mainItem} pt-4`}
+                draggable={true}
+                onDragStart={(evt) => dragStartHandler(evt, item)}
+                onDragLeave={(evt) => dragEndHandler(evt)}
+                onDragEnd={(evt) => dragEndHandler(evt)}
+                onDragOver={(evt) => dragOverHandler(evt)}
+                onDrop={(evt) => dropHandler(evt, item)}
               >
                 <DragIcon type="primary" />
                 <ConstructorElement
