@@ -12,6 +12,7 @@ import {
   selectConstructorIngredients,
 } from "../../services/ConstuctorSlice";
 import { clickIngredient } from "../../services/IngredientSlice";
+import { useDrag } from "react-dnd";
 
 export default function IngredientCard({ingredient}) {
   const dispatch = useDispatch();
@@ -20,7 +21,6 @@ export default function IngredientCard({ingredient}) {
   function onClick() {
     dispatch(clickIngredient(ingredient));
   }
-  // закрыть модалку, по клику добавлять в конструктор
 
   const bun = useSelector(selectConstructorBuns);
   const fillings = useSelector(selectConstructorIngredients);
@@ -32,8 +32,13 @@ export default function IngredientCard({ingredient}) {
     return fillings.filter((item) => item._id === ingredient._id).length;
   };
 
+  const [, dragRef] = useDrag({
+    type: 'ingredient',
+    item: ingredient,
+  });
+
   return (
-    <div className={`${cardStyle.card} mb-8`} onClick={onClick}>
+    <div className={`${cardStyle.card} mb-8`} onClick={onClick} ref={dragRef}>
       <img src={image} alt={name} />
       <div className={`${cardStyle.price} mt-1`}>
         <p className="text text_type_main-default">{price}</p>

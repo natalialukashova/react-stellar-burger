@@ -16,6 +16,8 @@ import {
 } from "../../services/ConstuctorSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { sendOrder } from "../../services/ConstuctorSlice";
+import { useDrop } from "react-dnd";
+import { addFilling, setBun } from "../../services/ConstuctorSlice";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -40,8 +42,20 @@ export default function BurgerConstructor() {
     [bun, fillings]
   );
 
+  const [, dropBox] = useDrop({
+    accept: 'ingredient',
+    drop (item) {
+      if (item.type === 'bun') {
+        dispatch(setBun(item));
+      } else {
+        dispatch(addFilling(item));
+      }
+
+    }
+  });
+
   return (
-    <section className={`${constuctorStyle.content} mt-25 ml-4`}>
+    <section className={`${constuctorStyle.content} mt-25 ml-4`} ref={dropBox}>
       {Object.keys(bun).length === 0 && fillings.length === 0 ? (
         <>
           <p className="text text_type_main-large mt-10 ml-4">
