@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { selectIngredient, setIngredient } from "./IngredientSlice";
 import { api } from "../Api/Api";
 
 const SLICE = "burger";
@@ -44,6 +43,7 @@ export const constructorSlice = createSlice({
         });
     },
     clearOrder: (state) => ({ ...state, order: null }),
+    setSwitchedFillings: (state, action) => ({ ...state, fillings: action.payload }),
   },
   extraReducers: (builder) => {
     builder.addCase(sendOrder.fulfilled, (state, action) => {
@@ -55,7 +55,7 @@ export const constructorSlice = createSlice({
   },
 });
 
-export const { setBun, addFilling, removeFilling, clearOrder } = constructorSlice.actions;
+export const { setBun, addFilling, removeFilling, clearOrder, setSwitchedFillings } = constructorSlice.actions;
 
 export const selectConstructorBuns = (state) => {
   return state[SLICE].burgerConstructor.bun;

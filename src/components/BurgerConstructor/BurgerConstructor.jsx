@@ -17,7 +17,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { sendOrder } from "../../services/ConstuctorSlice";
 import { useDrop } from "react-dnd";
-import { addFilling, setBun } from "../../services/ConstuctorSlice";
+import {
+  addFilling,
+  setBun,
+  setSwitchedFillings,
+} from "../../services/ConstuctorSlice";
 import { Reorder } from "framer-motion";
 
 export default function BurgerConstructor() {
@@ -54,6 +58,37 @@ export default function BurgerConstructor() {
     },
   });
 
+  const preparedFillings = React.useMemo(() => {
+    return fillings.map((item, index) => {
+      return (
+        <div key={item.uniqueId}>
+          <DragIcon type="primary" />
+          <ConstructorElement
+            text={item.name}
+            price={item.price}
+            thumbnail={item.image_mobile}
+            handleClose={() => dispatch(removeFilling(index))}
+          />
+        </div>
+      );
+    });
+  }, [fillings, dispatch]);
+
+  // const reorderFillings = React.useCallback(
+  //   (start, end) => {
+  //     dispatch(switchFillings({ start, end }));
+  //   },
+  //   [dispatch]
+  // );
+
+  const handleReorder = (arr) => {
+    const res = arr.map((item) => {
+      const { key } = item;
+      return fillings.find((item) => item.uniqueId === key);
+    });
+    dispatch(setSwitchedFillings(res));
+  };
+
   return (
     <section className={`${constuctorStyle.content} mt-25 ml-4`} ref={dropBox}>
       {Object.keys(bun).length === 0 && fillings.length === 0 ? (
@@ -81,38 +116,23 @@ export default function BurgerConstructor() {
             thumbnail={bun.image_mobile}
             className="ml-8"
           />
-          <Reorder
-            onReorder={(startId, endId) => {
-              if (startId > endId) {
-                return 1;
-              } else {
-                return -1;
-              }
-            }}
+          <Reorder.Group
+            className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}
+            as="div"
+            axis="y"
+            values={fillings}
+            onReorder={handleReorder}
           >
-            <Reorder.Group
-              className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}
-              as="div"
-              axis="y"
-              values={fillings}
-            >
-              {(item, index) => (
-                <Reorder.Item
-                  value={item}
-                  key={item._id}
-                  className={`${constuctorStyle.mainItem} pt-4`}
-                >
-                  <DragIcon type="primary" />
-                  <ConstructorElement
-                    text={item.name}
-                    price={item.price}
-                    thumbnail={item.image_mobile}
-                    handleClose={() => dispatch(removeFilling(index))}
-                  />
-                </Reorder.Item>
-              )}
-            </Reorder.Group>
-          </Reorder>
+            {preparedFillings.map((item, index) => (
+              <Reorder.Item
+                value={item}
+                key={fillings[index]._id}
+                className={`${constuctorStyle.mainItem} pt-4`}
+              >
+                {item}
+              </Reorder.Item>
+            ))}
+          </Reorder.Group>
 
           <ConstructorElement
             type="bottom"
