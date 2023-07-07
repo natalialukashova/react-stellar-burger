@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../Api/Api";
+import { nanoid } from "nanoid";
 
 const SLICE = "burger";
 const initialState = {
@@ -33,9 +34,10 @@ export const constructorSlice = createSlice({
     addFilling: (state, action) => {
       state.burgerConstructor.fillings = [
         ...state.burgerConstructor.fillings,
-        action.payload,
+        { ...action.payload, uniqueId: nanoid(12) },
       ];
     },
+
     removeFilling: (state, action) => {
       state.burgerConstructor.fillings =
         state.burgerConstructor.fillings.filter((item, index) => {
@@ -43,7 +45,10 @@ export const constructorSlice = createSlice({
         });
     },
     clearOrder: (state) => ({ ...state, order: null }),
-    setSwitchedFillings: (state, action) => ({ ...state, fillings: action.payload }),
+    setSwitchedFillings: (state, action) => ({
+      ...state,
+      fillings: action.payload,
+    }),
   },
   extraReducers: (builder) => {
     builder.addCase(sendOrder.fulfilled, (state, action) => {
@@ -55,7 +60,13 @@ export const constructorSlice = createSlice({
   },
 });
 
-export const { setBun, addFilling, removeFilling, clearOrder, setSwitchedFillings } = constructorSlice.actions;
+export const {
+  setBun,
+  addFilling,
+  removeFilling,
+  clearOrder,
+  setSwitchedFillings,
+} = constructorSlice.actions;
 
 export const selectConstructorBuns = (state) => {
   return state[SLICE].burgerConstructor.bun;
