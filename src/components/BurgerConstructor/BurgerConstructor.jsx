@@ -29,7 +29,6 @@ export default function BurgerConstructor() {
   const ingredientsList = fillings.map((item) => item._id);
   ingredientsList.unshift(bun._id);
 
-
   function onClick() {
     dispatch(sendOrder(ingredientsList));
   }
@@ -46,15 +45,14 @@ export default function BurgerConstructor() {
   );
 
   const [, dropBox] = useDrop({
-    accept: 'ingredient',
-    drop (item) {
-      if (item.type === 'bun') {
+    accept: "ingredient",
+    drop(item) {
+      if (item.type === "bun") {
         dispatch(setBun(item));
       } else {
         dispatch(addFilling(item));
       }
-
-    }
+    },
   });
 
   return (
@@ -85,18 +83,19 @@ export default function BurgerConstructor() {
             className="ml-8"
           />
 
-          <div className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}>
+          <Reorder.Group
+            className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}
+            as="div"
+            axis="y"
+            values={mains}
+            onReorder={setMains}
+          >
             {fillings.map((item, index) => (
-              <Reorder.Group
+              <Reorder.Item
+                value={item}
                 key={item._id}
                 className={`${constuctorStyle.mainItem} pt-4`}
-                as="div"
-                axis="y"
-                values={mains}
-                onReorder={setMains}
-
               >
-              <Reorder.Item value={item}>
                 <DragIcon type="primary" />
                 <ConstructorElement
                   text={item.name}
@@ -104,10 +103,9 @@ export default function BurgerConstructor() {
                   thumbnail={item.image_mobile}
                   handleClose={() => dispatch(removeFilling(index))}
                 />
-                </Reorder.Item>
-              </Reorder.Group>
+              </Reorder.Item>
             ))}
-          </div>
+          </Reorder.Group>
 
           <ConstructorElement
             type="bottom"
