@@ -13,7 +13,7 @@ import {
 } from "../../services/ConstuctorSlice";
 import { clickIngredient } from "../../services/IngredientSlice";
 
-export default function IngredientCard(ingredient) {
+export default function IngredientCard({ingredient}) {
   const dispatch = useDispatch();
   const { image, name, price } = ingredient;
 
