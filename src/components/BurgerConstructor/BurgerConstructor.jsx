@@ -24,7 +24,6 @@ export default function BurgerConstructor() {
   const dispatch = useDispatch();
   const bun = useSelector(selectConstructorBuns);
   const fillings = useSelector(selectConstructorIngredients);
-  const [mains, setMains] = useState(fillings);
 
   const ingredientsList = fillings.map((item) => item._id);
   ingredientsList.unshift(bun._id);
@@ -82,30 +81,38 @@ export default function BurgerConstructor() {
             thumbnail={bun.image_mobile}
             className="ml-8"
           />
-
-          <Reorder.Group
-            className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}
-            as="div"
-            axis="y"
-            values={mains}
-            onReorder={setMains}
+          <Reorder
+            onReorder={(startId, endId) => {
+              if (startId > endId) {
+                return 1;
+              } else {
+                return -1;
+              }
+            }}
           >
-            {fillings.map((item, index) => (
-              <Reorder.Item
-                value={item}
-                key={item._id}
-                className={`${constuctorStyle.mainItem} pt-4`}
-              >
-                <DragIcon type="primary" />
-                <ConstructorElement
-                  text={item.name}
-                  price={item.price}
-                  thumbnail={item.image_mobile}
-                  handleClose={() => dispatch(removeFilling(index))}
-                />
-              </Reorder.Item>
-            ))}
-          </Reorder.Group>
+            <Reorder.Group
+              className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}
+              as="div"
+              axis="y"
+              values={fillings}
+            >
+              {(item, index) => (
+                <Reorder.Item
+                  value={item}
+                  key={item._id}
+                  className={`${constuctorStyle.mainItem} pt-4`}
+                >
+                  <DragIcon type="primary" />
+                  <ConstructorElement
+                    text={item.name}
+                    price={item.price}
+                    thumbnail={item.image_mobile}
+                    handleClose={() => dispatch(removeFilling(index))}
+                  />
+                </Reorder.Item>
+              )}
+            </Reorder.Group>
+          </Reorder>
 
           <ConstructorElement
             type="bottom"
