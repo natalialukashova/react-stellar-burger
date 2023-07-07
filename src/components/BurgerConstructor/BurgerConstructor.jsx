@@ -46,7 +46,7 @@ export default function BurgerConstructor() {
 
   const [, dropBox] = useDrop({
     accept: "ingredient",
-    drop(item) {
+    drop: function (item) {
       if (item.type === "bun") {
         dispatch(setBun(item));
       } else {
