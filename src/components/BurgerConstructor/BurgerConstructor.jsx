@@ -18,13 +18,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendOrder } from "../../services/ConstuctorSlice";
 import { useDrop } from "react-dnd";
 import { addFilling, setBun } from "../../services/ConstuctorSlice";
+import { Reorder } from "framer-motion";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
   const bun = useSelector(selectConstructorBuns);
   const fillings = useSelector(selectConstructorIngredients);
-  const [currentItem, setCurrentItem] = useState(null);
-  const [fillingsList, setFillingsList] = useState()
+  const [mains, setMains] = useState(fillings);
 
   const ingredientsList = fillings.map((item) => item._id);
   ingredientsList.unshift(bun._id);
@@ -57,38 +57,6 @@ export default function BurgerConstructor() {
     }
   });
 
-  function dragStartHandler (evt, item) {
-    setCurrentItem(item);
-  }
-
-  function dragEndHandler (evt) {}
-
-  function dragOverHandler (evt) {
-    evt.preventDefault();
-
-  }
-
-  function dropHandler (evt, item) {
-    evt.preventDefault();
-    setFillingsList(ingredientsList.map(i => {
-      if (i._id === item._id) {
-        return {...i, id: currentItem.id}
-      }
-      if (i._id === currentItem._id) {
-        return {...i, id: item.id}
-      }
-      return i;
-    }))
-  }
-
-  const sortFillings = (a, b) => {
-    if (a.id > b.id) {
-      return 1;
-    } else {
-      return -1;
-    }
-  }
-
   return (
     <section className={`${constuctorStyle.content} mt-25 ml-4`} ref={dropBox}>
       {Object.keys(bun).length === 0 && fillings.length === 0 ? (
@@ -118,17 +86,17 @@ export default function BurgerConstructor() {
           />
 
           <div className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}>
-            {fillings.sort(sortFillings).map((item, index) => (
-              <div
+            {fillings.map((item, index) => (
+              <Reorder.Group
                 key={item._id}
                 className={`${constuctorStyle.mainItem} pt-4`}
-                draggable={true}
-                onDragStart={(evt) => dragStartHandler(evt, item)}
-                onDragLeave={(evt) => dragEndHandler(evt)}
-                onDragEnd={(evt) => dragEndHandler(evt)}
-                onDragOver={(evt) => dragOverHandler(evt)}
-                onDrop={(evt) => dropHandler(evt, item)}
+                as="div"
+                axis="y"
+                values={mains}
+                onReorder={setMains}
+
               >
+              <Reorder.Item value={item}>
                 <DragIcon type="primary" />
                 <ConstructorElement
                   text={item.name}
@@ -136,7 +104,8 @@ export default function BurgerConstructor() {
                   thumbnail={item.image_mobile}
                   handleClose={() => dispatch(removeFilling(index))}
                 />
-              </div>
+                </Reorder.Item>
+              </Reorder.Group>
             ))}
           </div>
 

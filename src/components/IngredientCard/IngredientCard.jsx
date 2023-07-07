@@ -13,6 +13,7 @@ import {
 } from "../../services/ConstuctorSlice";
 import { clickIngredient } from "../../services/IngredientSlice";
 import { useDrag } from "react-dnd";
+import { Reorder } from "framer-motion";
 
 export default function IngredientCard({ingredient}) {
   const dispatch = useDispatch();
