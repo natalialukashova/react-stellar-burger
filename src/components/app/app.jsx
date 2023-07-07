@@ -23,8 +23,6 @@ function App() {
   const clickedIngredient = useSelector(selectedIngredient)
   const dispatch = useDispatch();
 
-  console.log(clickedIngredient)
-
   function openModal(modalHeaderName = "", mainModal) {
     setChildModal(mainModal);
     setheaderModal(modalHeaderName);

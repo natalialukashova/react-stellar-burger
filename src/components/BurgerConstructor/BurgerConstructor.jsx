@@ -86,6 +86,7 @@ export default function BurgerConstructor() {
       const { key } = item;
       return fillings.find((item) => item.uniqueId === key);
     });
+    console.log(res)
     dispatch(setSwitchedFillings(res));
   };
 
