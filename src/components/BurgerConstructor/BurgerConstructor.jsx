@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import constuctorStyle from "../BurgerConstructor/BurgerConstructor.module.css";
 import {
   ConstructorElement,
@@ -15,8 +15,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { sendOrder } from "../../services/ConstuctorSlice";
 import { useDrop } from "react-dnd";
-import DropZone from "../DropZone/DropZone";
-import DragItem from "../DragItem/DragItem";
+import ConstructorItem from "../ConstructorItem/ConstructorItem";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -43,7 +42,7 @@ export default function BurgerConstructor() {
 
   const [, dropBox] = useDrop({
     accept: "ingredient",
-    drop(item) {
+    drop: function (item) {
       if (item.type === "bun") {
         dispatch(setBun(item));
       } else {
@@ -51,6 +50,8 @@ export default function BurgerConstructor() {
       }
     },
   });
+
+  // сортировка внутри ингредиентов
 
   return (
     <section className={`${constuctorStyle.content} mt-25 ml-4`} ref={dropBox}>
@@ -80,11 +81,10 @@ export default function BurgerConstructor() {
             className="ml-8"
           />
           <ul className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}>
-            {fillings.map((item, index) => (
-              <DropZone>
-              <DragItem item={item} index={index} />
-              </DropZone>
-            ))}
+              {fillings.map((item, index) => (
+                // тут ингредиенты мапятся
+                <ConstructorItem item={item} index={index} />
+              ))}
           </ul>
           <ConstructorElement
             type="bottom"

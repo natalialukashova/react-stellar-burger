@@ -37,7 +37,6 @@ export const constructorSlice = createSlice({
         { ...action.payload, uniqueId: nanoid(12) },
       ];
     },
-
     removeFilling: (state, action) => {
       state.burgerConstructor.fillings =
         state.burgerConstructor.fillings.filter((item, index) => {
@@ -45,10 +44,9 @@ export const constructorSlice = createSlice({
         });
     },
     clearOrder: (state) => ({ ...state, order: null }),
-    setSwitchedFillings: (state, action) => ({
-      ...state,
-      fillings: action.payload,
-    }),
+    setSwitchedFillings: (state, action) => {
+      state.burgerConstructor.fillings = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(sendOrder.fulfilled, (state, action) => {
