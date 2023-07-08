@@ -86,7 +86,6 @@ export default function BurgerConstructor() {
       const { key } = item;
       return fillings.find((item) => item.uniqueId === key);
     });
-    console.log(res)
     dispatch(setSwitchedFillings(res));
   };
 
@@ -121,7 +120,7 @@ export default function BurgerConstructor() {
             className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}
             as="div"
             axis="y"
-            values={fillings}
+            values={preparedFillings}
             onReorder={handleReorder}
           >
             {preparedFillings.map((item, index) => (
