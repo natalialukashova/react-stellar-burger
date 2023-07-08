@@ -4,7 +4,6 @@ import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,7 +12,6 @@ import {
 } from "../../services/ConstuctorSlice";
 import { clickIngredient } from "../../services/IngredientSlice";
 import { useDrag } from "react-dnd";
-import { Reorder } from "framer-motion";
 
 export default function IngredientCard({ingredient}) {
   const dispatch = useDispatch();

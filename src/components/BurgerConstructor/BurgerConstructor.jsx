@@ -13,16 +13,12 @@ import {
   removeFilling,
   selectConstructorIngredients,
   selectConstructorBuns,
+  setBun,
+  addFilling,
 } from "../../services/ConstuctorSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { sendOrder } from "../../services/ConstuctorSlice";
 import { useDrop } from "react-dnd";
-import {
-  addFilling,
-  setBun,
-  setSwitchedFillings,
-} from "../../services/ConstuctorSlice";
-import { Reorder } from "framer-motion";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -49,7 +45,7 @@ export default function BurgerConstructor() {
 
   const [, dropBox] = useDrop({
     accept: "ingredient",
-    drop: function (item) {
+    drop(item) {
       if (item.type === "bun") {
         dispatch(setBun(item));
       } else {
@@ -57,37 +53,6 @@ export default function BurgerConstructor() {
       }
     },
   });
-
-  const preparedFillings = React.useMemo(() => {
-    return fillings.map((item, index) => {
-      return (
-        <div key={item.uniqueId}>
-          <DragIcon type="primary" />
-          <ConstructorElement
-            text={item.name}
-            price={item.price}
-            thumbnail={item.image_mobile}
-            handleClose={() => dispatch(removeFilling(index))}
-          />
-        </div>
-      );
-    });
-  }, [fillings, dispatch]);
-
-  // const reorderFillings = React.useCallback(
-  //   (start, end) => {
-  //     dispatch(switchFillings({ start, end }));
-  //   },
-  //   [dispatch]
-  // );
-
-  const handleReorder = (arr) => {
-    const res = arr.map((item) => {
-      const { key } = item;
-      return fillings.find((item) => item.uniqueId === key);
-    });
-    dispatch(setSwitchedFillings(res));
-  };
 
   return (
     <section className={`${constuctorStyle.content} mt-25 ml-4`} ref={dropBox}>
@@ -116,24 +81,22 @@ export default function BurgerConstructor() {
             thumbnail={bun.image_mobile}
             className="ml-8"
           />
-          <Reorder.Group
-            className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}
-            as="div"
-            axis="y"
-            values={preparedFillings}
-            onReorder={handleReorder}
-          >
-            {preparedFillings.map((item, index) => (
-              <Reorder.Item
-                value={item}
-                key={fillings[index]._id}
+          <div className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}>
+            {fillings.map((item, index) => (
+              <div
+                key={item._id}
                 className={`${constuctorStyle.mainItem} pt-4`}
               >
-                {item}
-              </Reorder.Item>
+                <DragIcon type="primary" />
+                <ConstructorElement
+                  text={item.name}
+                  price={item.price}
+                  thumbnail={item.image_mobile}
+                  handleClose={() => dispatch(removeFilling(index))}
+                />
+              </div>
             ))}
-          </Reorder.Group>
-
+          </div>
           <ConstructorElement
             type="bottom"
             isLocked={true}
@@ -142,7 +105,6 @@ export default function BurgerConstructor() {
             thumbnail={bun.image_mobile}
             className="ml-8"
           />
-
           <div className={`${constuctorStyle.footer} mt-10`}>
             <div className={`${constuctorStyle.price} mr-10`}>
               <p className="text text_type_digits-medium pr-3">{totalPrice}</p>
