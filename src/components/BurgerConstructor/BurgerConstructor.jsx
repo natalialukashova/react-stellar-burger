@@ -18,8 +18,9 @@ import {
 } from "../../services/ConstuctorSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { sendOrder } from "../../services/ConstuctorSlice";
-import { useDrop, useDrag } from "react-dnd";
+import { useDrop } from "react-dnd";
 import DropZone from "../DropZone/DropZone";
+import DragItem from "../DragItem/DragItem";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -55,11 +56,6 @@ export default function BurgerConstructor() {
     },
   });
 
-  const [, dragItem] = useDrag({
-    type: 'item',
-    item: item,
-  });
-
   return (
     <section className={`${constuctorStyle.content} mt-25 ml-4`} ref={dropBox}>
       {Object.keys(bun).length === 0 && fillings.length === 0 ? (
@@ -90,20 +86,7 @@ export default function BurgerConstructor() {
           <ul className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}>
             {fillings.map((item, index) => (
               <DropZone>
-              <li
-                key={item._id}
-                className={`${constuctorStyle.mainItem} pt-4`}
-                
-                ref={dragItem}
-              >
-                <DragIcon type="primary" />
-                <ConstructorElement
-                  text={item.name}
-                  price={item.price}
-                  thumbnail={item.image_mobile}
-                  handleClose={() => dispatch(removeFilling(index))}
-                />
-              </li>
+              <DragItem item={item} index={index} />
               </DropZone>
             ))}
           </ul>
