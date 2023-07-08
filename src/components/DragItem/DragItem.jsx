@@ -8,7 +8,7 @@ import {
  } from "@ya.praktikum/react-developer-burger-ui-components";
  import constuctorStyle from "../BurgerConstructor/BurgerConstructor.module.css";
 
-export default function DragItem({item, index}) {
+function DragItem({item, index}) {
   const dispatch = useDispatch();
 
   const [, dragItem] = useDrag({
@@ -32,3 +32,5 @@ export default function DragItem({item, index}) {
     </li>
   );
 }
+
+export default React.memo(DragItem);

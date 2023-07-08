@@ -3,7 +3,7 @@ import { useDrop } from "react-dnd";
 import { setSwitchedFillings } from "../../services/ConstuctorSlice";
 import { useDispatch } from "react-redux";
 
-export default function DropZone({children}) {
+function DropZone({children}) {
   const dispatch = useDispatch();
 
   const [, dropZone] = useDrop({
@@ -15,3 +15,5 @@ export default function DropZone({children}) {
 
   return <div ref={dropZone}>{children}</div>;
 }
+
+export default React.memo(DropZone);

@@ -2,15 +2,11 @@ import React, { useMemo, useState } from "react";
 import constuctorStyle from "../BurgerConstructor/BurgerConstructor.module.css";
 import {
   ConstructorElement,
-  DragIcon,
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import OrderDetails from "../OrderDetails/OrderDetails";
 import PropTypes from "prop-types";
-import { ingredientPropType } from "../../utils/prop-types";
 import {
-  removeFilling,
   selectConstructorIngredients,
   selectConstructorBuns,
   setBun,
