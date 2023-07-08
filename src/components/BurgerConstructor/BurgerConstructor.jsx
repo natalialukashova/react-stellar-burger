@@ -11,7 +11,6 @@ import {
   selectConstructorBuns,
   setBun,
   addFilling,
-  setSwitchedFillings,
 } from "../../services/ConstuctorSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { sendOrder } from "../../services/ConstuctorSlice";
@@ -53,10 +52,6 @@ export default function BurgerConstructor() {
     },
   });
 
-  const handleDrop = (item) => {
-    dispatch(setSwitchedFillings(item))
-  };
-
   return (
     <section className={`${constuctorStyle.content} mt-25 ml-4`} ref={dropBox}>
       {Object.keys(bun).length === 0 && fillings.length === 0 ? (
@@ -86,7 +81,7 @@ export default function BurgerConstructor() {
           />
           <ul className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}>
             {fillings.map((item, index) => (
-              <DropZone handleDrop={handleDrop}>
+              <DropZone>
               <DragItem item={item} index={index} />
               </DropZone>
             ))}
