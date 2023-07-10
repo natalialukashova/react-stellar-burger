@@ -58,7 +58,7 @@ export default function BurgerIngredients() {
         </Tab>
         <Tab
           value="sauce"
-          active={inVievSauces}
+          active={inVievSauces && !inViewBuns}
           onClick={() => {
             setCurrent("sauce");
             saucesRef.current.scrollIntoView({ behavior: "smooth" });
