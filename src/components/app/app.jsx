@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./app.module.css";
+import styles from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import Main from "../Main/Main";
 import { useEffect, useState } from "react";

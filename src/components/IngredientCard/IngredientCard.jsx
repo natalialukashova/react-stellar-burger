@@ -12,6 +12,7 @@ import {
 } from "../../services/ConstuctorSlice";
 import { clickIngredient } from "../../services/IngredientSlice";
 import { useDrag } from "react-dnd";
+import { ingredientPropType } from "../../utils/prop-types";
 
 export default function IngredientCard({ingredient}) {
   const dispatch = useDispatch();
@@ -49,4 +50,8 @@ export default function IngredientCard({ingredient}) {
       <Counter count={count(ingredient)} />
     </div>
   );
+}
+
+IngredientCard.propTypes = {
+  ingredient: ingredientPropType,
 }
