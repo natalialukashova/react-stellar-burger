@@ -11,7 +11,7 @@ import {
 import { useInView } from "react-intersection-observer";
 
 export default function BurgerIngredients() {
-  const [current, setCurrent] = React.useState("bun");
+  const [current, setCurrent] = React.useState();
   const dispatch = useDispatch();
   const { items, loading } = useSelector(selectIngredients);
   const bunsRef = useRef(null);
@@ -27,22 +27,20 @@ export default function BurgerIngredients() {
     dispatch(loadIngredients());
   }, []);
 
-  const { bunsWatchRef, inViewBuns } = useInView({
+  const [ bunsWatchRef, inViewBuns ] = useInView({
     threshold: 0.5,
     root: baseRef.current,
   });
 
-  const { saucesWatchRef, inVievSauces } = useInView({
+  const [ saucesWatchRef, inVievSauces ] = useInView({
     threshold: 1,
     root: baseRef.current,
   });
 
-  const { mainsWatchRef, inViewMain } = useInView({
-    threshold: 1,
+  const [ mainsWatchRef, inViewMain ] = useInView({
+    threshold: 0.5,
     root: baseRef.current,
   });
-
-  console.log(inViewMain);
 
   return (
     <div className={`${ingredientStyles.ingredients} ml-4`}>
@@ -50,7 +48,7 @@ export default function BurgerIngredients() {
       <div className={`${ingredientStyles.tab} mt-5`}>
         <Tab
           value="bun"
-          active={current === "bun"}
+          active={inViewBuns}
           onClick={() => {
             setCurrent("bun");
             bunsRef.current.scrollIntoView({ behavior: "smooth" });
@@ -60,7 +58,7 @@ export default function BurgerIngredients() {
         </Tab>
         <Tab
           value="sauce"
-          active={current === "sauce"}
+          active={inVievSauces}
           onClick={() => {
             setCurrent("sauce");
             saucesRef.current.scrollIntoView({ behavior: "smooth" });
@@ -70,7 +68,7 @@ export default function BurgerIngredients() {
         </Tab>
         <Tab
           value="main"
-          active={inViewMain ? current === 'main' : null}
+          active={inViewMain}
           onClick={() => {
             setCurrent("main");
             mainsRef.current.scrollIntoView({ behavior: "smooth" });
