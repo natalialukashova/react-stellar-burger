@@ -3,14 +3,12 @@ import ingredientStyles from "../BurgerIngredients/BurgerIngredients.module.css"
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientCard from "../IngredientCard/IngredientCard";
 import PropTypes from "prop-types";
-import { ingredientPropType } from "../../utils/prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadIngredients,
   selectIngredients,
 } from "../../services/IngredientSlice";
-import { addFilling, setBun } from "../../services/ConstuctorSlice";
-import { clickIngredient } from "../../services/IngredientSlice";
+import { useInView } from "react-intersection-observer";
 
 export default function BurgerIngredients() {
   const [current, setCurrent] = React.useState("bun");
@@ -27,6 +25,16 @@ export default function BurgerIngredients() {
   useEffect(() => {
     dispatch(loadIngredients());
   }, []);
+
+  const { refMains, inViewMain } = useInView({
+    threshold: 1,
+  });
+
+  useEffect(() => {
+    if (inViewMain) {
+      setCurrent('main')
+    }
+  }, [inViewMain]);
 
   return (
     <div className={`${ingredientStyles.ingredients} ml-4`}>
@@ -97,7 +105,7 @@ export default function BurgerIngredients() {
             >
               Начинки
             </h3>
-            <div className={ingredientStyles.cardList}>
+            <div className={ingredientStyles.cardList} ref={refMains}>
               {main.map((item) => (
                 <IngredientCard key={item._id} ingredient={item} />
               ))}
