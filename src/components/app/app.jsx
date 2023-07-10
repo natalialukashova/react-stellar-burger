@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./app.module.css";
-import { data } from "../../utils/data";
 import AppHeader from "../AppHeader/AppHeader";
 import Main from "../Main/Main";
 import { useEffect, useState } from "react";
@@ -49,7 +48,7 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Main data={data} openModal={openModal} />
+      <Main />
       {order && (
         <Modal headerModal="" closeModal={closeOrderModal}>
           <OrderDetails order={order} />

@@ -27,16 +27,22 @@ export default function BurgerIngredients() {
     dispatch(loadIngredients());
   }, []);
 
+  const { bunsWatchRef, inViewBuns } = useInView({
+    threshold: 0.5,
+    root: baseRef.current,
+  });
+
+  const { saucesWatchRef, inVievSauces } = useInView({
+    threshold: 1,
+    root: baseRef.current,
+  });
+
   const { mainsWatchRef, inViewMain } = useInView({
     threshold: 1,
     root: baseRef.current,
   });
 
-  useEffect(() => {
-    if (inViewMain) {
-      setCurrent('main')
-    }
-  }, [inViewMain]);
+  console.log(inViewMain)
 
   return (
     <div className={`${ingredientStyles.ingredients} ml-4`}>
@@ -64,7 +70,7 @@ export default function BurgerIngredients() {
         </Tab>
         <Tab
           value="main"
-          active={current === "main"}
+          active={inViewMain ? current === 'main' : null}
           onClick={() => {
             setCurrent("main");
             mainsRef.current.scrollIntoView({ behavior: "smooth" });
@@ -83,7 +89,7 @@ export default function BurgerIngredients() {
             <h3 className="text text_type_main-medium mb-6 mt-10" ref={bunsRef}>
               Булки
             </h3>
-            <div className={ingredientStyles.cardList}>
+            <div className={ingredientStyles.cardList} ref={bunsWatchRef}>
               {buns.map((item) => (
                 <IngredientCard key={item._id} ingredient={item} />
               ))}
@@ -95,7 +101,7 @@ export default function BurgerIngredients() {
             >
               Соусы
             </h3>
-            <div className={ingredientStyles.cardList}>
+            <div className={ingredientStyles.cardList} ref={saucesWatchRef}>
               {sauces.map((item) => (
                 <IngredientCard key={item._id} ingredient={item} />
               ))}
