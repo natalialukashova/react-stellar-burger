@@ -42,7 +42,7 @@ export default function BurgerIngredients() {
     root: baseRef.current,
   });
 
-  console.log(inViewMain)
+  console.log(inViewMain);
 
   return (
     <div className={`${ingredientStyles.ingredients} ml-4`}>
