@@ -17,6 +17,7 @@ export default function BurgerIngredients() {
   const bunsRef = useRef(null);
   const saucesRef = useRef(null);
   const mainsRef = useRef(null);
+  const baseRef = useRef()
 
   const buns = items.filter((item) => item.type === "bun");
   const sauces = items.filter((item) => item.type === "sauce");
@@ -26,8 +27,9 @@ export default function BurgerIngredients() {
     dispatch(loadIngredients());
   }, []);
 
-  const { refMains, inViewMain } = useInView({
+  const { mainsWatchRef, inViewMain } = useInView({
     threshold: 1,
+    root: baseRef.current,
   });
 
   useEffect(() => {
@@ -71,7 +73,7 @@ export default function BurgerIngredients() {
           Начинки
         </Tab>
       </div>
-      <section className={ingredientStyles.section}>
+      <section className={ingredientStyles.section} ref={baseRef}>
         {loading ? (
           <p className="text text_type_main-medium mt-4">
             Ингредиенты загружаются...
@@ -105,7 +107,7 @@ export default function BurgerIngredients() {
             >
               Начинки
             </h3>
-            <div className={ingredientStyles.cardList} ref={refMains}>
+            <div className={ingredientStyles.cardList} ref={mainsWatchRef}>
               {main.map((item) => (
                 <IngredientCard key={item._id} ingredient={item} />
               ))}
