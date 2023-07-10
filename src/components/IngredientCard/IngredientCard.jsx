@@ -50,7 +50,3 @@ export default function IngredientCard({ingredient}) {
     </div>
   );
 }
-
-IngredientCard.propTypes = {
-  openModal: PropTypes.func,
-};

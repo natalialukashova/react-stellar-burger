@@ -12,6 +12,7 @@ import {
 import constuctorStyle from "../BurgerConstructor/BurgerConstructor.module.css";
 import { moveInArray } from "../../utils/moveInArray";
 import { selectConstructorIngredients } from "../../services/ConstuctorSlice";
+import { ingredientPropType } from "../../utils/prop-types";
 
 function ConstructorItem({ item, index }) {
   const dispatch = useDispatch();
@@ -70,6 +71,11 @@ function ConstructorItem({ item, index }) {
       />
     </li>
   );
+}
+
+ConstructorItem.propTypes = {
+  item: ingredientPropType,
+  index: ingredientPropType.index,
 }
 
 export default React.memo(ConstructorItem);

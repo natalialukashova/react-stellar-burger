@@ -12,8 +12,8 @@ import {
 import { addFilling, setBun } from "../../services/ConstuctorSlice";
 import { clickIngredient } from "../../services/IngredientSlice";
 
-export default function BurgerIngredients({ openModal }) {
-  const [current, setCurrent] = React.useState('bun');
+export default function BurgerIngredients() {
+  const [current, setCurrent] = React.useState("bun");
   const dispatch = useDispatch();
   const { items, loading } = useSelector(selectIngredients);
   const bunsRef = useRef(null);
@@ -75,11 +75,7 @@ export default function BurgerIngredients({ openModal }) {
             </h3>
             <div className={ingredientStyles.cardList}>
               {buns.map((item) => (
-                <IngredientCard
-                  ingredient={item}
-                  key={item._id}
-                  /*onClick={() => dispatch(setBun(item))}*/
-                />
+                <IngredientCard key={item._id} ingredient={item} />
               ))}
             </div>
 
@@ -91,11 +87,7 @@ export default function BurgerIngredients({ openModal }) {
             </h3>
             <div className={ingredientStyles.cardList}>
               {sauces.map((item) => (
-                <IngredientCard
-                  ingredient={item}
-                  key={item._id}
-                  /*onClick={() => dispatch(addFilling(item))}*/
-                />
+                <IngredientCard key={item._id} ingredient={item} />
               ))}
             </div>
 
@@ -107,11 +99,7 @@ export default function BurgerIngredients({ openModal }) {
             </h3>
             <div className={ingredientStyles.cardList}>
               {main.map((item) => (
-                <IngredientCard
-                  ingredient={item}
-                  key={item._id}
-                  /*onClick={() => dispatch(addFilling(item))}*/
-                />
+                <IngredientCard key={item._id} ingredient={item} />
               ))}
             </div>
           </>
@@ -120,8 +108,3 @@ export default function BurgerIngredients({ openModal }) {
     </div>
   );
 }
-
-BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropType),
-  openModal: PropTypes.func,
-};

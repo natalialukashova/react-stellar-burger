@@ -75,7 +75,7 @@ export default function BurgerConstructor() {
           <ConstructorElement
             type="top"
             isLocked={true}
-            text={bun.name}
+            text={`${bun.name} (верх)`}
             price={bun.price}
             thumbnail={bun.image_mobile}
             className="ml-8"
@@ -83,13 +83,13 @@ export default function BurgerConstructor() {
           <ul className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}>
               {fillings.map((item, index) => (
                 // тут ингредиенты мапятся
-                <ConstructorItem item={item} index={index} />
+                <ConstructorItem key={item.uniqueId} item={item} index={index} />
               ))}
           </ul>
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text={bun.name}
+            text={`${bun.name} (низ)`}
             price={bun.price}
             thumbnail={bun.image_mobile}
             className="ml-8"
@@ -113,7 +113,3 @@ export default function BurgerConstructor() {
     </section>
   );
 }
-
-BurgerConstructor.propTypes = {
-  openModal: PropTypes.func,
-};

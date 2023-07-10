@@ -9,18 +9,13 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 function Main() {
   return (
-    <div className={mainStyles.main}>
+    <main className={mainStyles.main}>
       <DndProvider backend={HTML5Backend}>
         <BurgerIngredients />
         <BurgerConstructor />
       </DndProvider>
-    </div>
+    </main>
   );
 }
 
 export default React.memo(Main);
-
-Main.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropType),
-  openModal: PropTypes.func,
-};
