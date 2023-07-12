@@ -22,7 +22,7 @@ export default function Modal({ closeModal, children, headerModal = "" }) {
   React.useEffect(() => {
     document.addEventListener("keydown", closeEsc);
     return () => {
-      document.addEventListener("keydown", closeEsc);
+      document.removeEventListener("keydown", closeEsc);
     };
   }, []);
 
