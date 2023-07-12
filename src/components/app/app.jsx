@@ -12,6 +12,7 @@ import { clearOrder } from "../../services/ConstuctorSlice";
 import { selectedIngredient } from "../../services/IngredientSlice";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { clearIngredient } from "../../services/IngredientSlice";
+import { loadIngredients } from "../../services/IngredientSlice";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -37,12 +38,7 @@ function App() {
   })
 
   useEffect(() => {
-    api
-      .getIngredients()
-      .then((data) => {
-        setIngredients(data);
-      })
-      .catch((err) => console.log(err));
+    dispatch(loadIngredients());
   }, []);
 
   return (
