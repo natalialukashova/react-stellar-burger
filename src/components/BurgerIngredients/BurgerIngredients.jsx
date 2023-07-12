@@ -23,10 +23,6 @@ export default function BurgerIngredients() {
   const sauces = items.filter((item) => item.type === "sauce");
   const main = items.filter((item) => item.type === "main");
 
-  useEffect(() => {
-    dispatch(loadIngredients());
-  }, []);
-
   const [ bunsWatchRef, inViewBuns ] = useInView({
     threshold: 0.5,
     root: baseRef.current,
