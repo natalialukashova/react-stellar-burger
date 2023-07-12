@@ -2,13 +2,15 @@
    display: flex;
    flex-direction: column;
    align-items: center;
+   width: 600px;
  }
 
 .section {
    display: flex;
    flex-direction: column;
    overflow-y: scroll;
-   max-height: 656px;
+   height: 656px;
+   width: 550px;
 }
 
 .section::-webkit-scrollbar {
@@ -29,6 +31,7 @@
  .mainItem {
    display: flex;
    align-items: center;
+   list-style-type: none;
  }
  
  .footer {
