@@ -13,6 +13,7 @@ import { selectedIngredient } from "../../services/IngredientSlice";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { clearIngredient } from "../../services/IngredientSlice";
 import { loadIngredients } from "../../services/IngredientSlice";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -20,7 +21,7 @@ function App() {
   const [headerModal, setheaderModal] = React.useState("");
   const [childModal, setChildModal] = React.useState("");
   const order = useSelector(selectOrder);
-  const clickedIngredient = useSelector(selectedIngredient)
+  const clickedIngredient = useSelector(selectedIngredient);
   const dispatch = useDispatch();
 
   function openModal(modalHeaderName = "", mainModal) {
@@ -30,32 +31,36 @@ function App() {
   }
 
   const closeOrderModal = React.useCallback(() => {
-    dispatch(clearOrder())
+    dispatch(clearOrder());
   }, []);
 
   const closeIngredientModal = React.useCallback(() => {
-    dispatch(clearIngredient())
-  })
+    dispatch(clearIngredient());
+  });
 
   useEffect(() => {
     dispatch(loadIngredients());
   }, []);
 
   return (
-    <div className={styles.app}>
-      <AppHeader />
-      <Main />
-      {order && (
-        <Modal headerModal="" closeModal={closeOrderModal}>
-          <OrderDetails order={order} />
-        </Modal>
-      )}
-      {clickedIngredient && (
-        <Modal headerModal="" closeModal={closeIngredientModal} >
-          <IngredientDetails ingredient={clickedIngredient}  />
-        </Modal>
-      )}
-    </div>
+    <BrowserRouter>
+      <div className={styles.app}>
+        <AppHeader />
+        <Routes>
+          <Route path="/" element={<Main />} />
+        </Routes>
+        {order && (
+          <Modal headerModal="" closeModal={closeOrderModal}>
+            <OrderDetails order={order} />
+          </Modal>
+        )}
+        {clickedIngredient && (
+          <Modal headerModal="" closeModal={closeIngredientModal}>
+            <IngredientDetails ingredient={clickedIngredient} />
+          </Modal>
+        )}
+      </div>
+    </BrowserRouter>
   );
 }
 
