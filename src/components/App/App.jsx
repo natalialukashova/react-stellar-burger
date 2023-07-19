@@ -14,6 +14,7 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { clearIngredient } from "../../services/IngredientSlice";
 import { loadIngredients } from "../../services/IngredientSlice";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { RegistrationPage } from '../../pages/register'
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -48,6 +49,7 @@ function App() {
         <AppHeader />
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/register" element={<RegistrationPage />} />
         </Routes>
         {order && (
           <Modal headerModal="" closeModal={closeOrderModal}>
