@@ -15,6 +15,8 @@ import { clearIngredient } from "../../services/IngredientSlice";
 import { loadIngredients } from "../../services/IngredientSlice";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RegistrationPage } from '../../pages/register'
+import { LoginPage } from '../../pages/login'
+import ForgotPassword from "../../pages/forgot-password";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -50,6 +52,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/register" element={<RegistrationPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
         {order && (
           <Modal headerModal="" closeModal={closeOrderModal}>

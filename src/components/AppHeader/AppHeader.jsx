@@ -28,7 +28,7 @@ export default function AppHeader() {
           <Logo />
         </div>
         <NavLink
-          to={{ pathname: "/register" }}
+          to={{ pathname: "/login" }}
           className={`${headerStyles.link} ml-5 mr-5 mb-4 mt-4`}
         >
           <ProfileIcon type="primary" />
