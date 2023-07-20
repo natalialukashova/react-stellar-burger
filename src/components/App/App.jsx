@@ -14,9 +14,10 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { clearIngredient } from "../../services/IngredientSlice";
 import { loadIngredients } from "../../services/IngredientSlice";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { RegistrationPage } from '../../pages/register'
-import { LoginPage } from '../../pages/login'
+import { RegistrationPage } from "../../pages/register";
+import { LoginPage } from "../../pages/login";
 import ForgotPassword from "../../pages/forgot-password";
+import { ResetPassword } from "../../pages/reset-password";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -54,6 +55,7 @@ function App() {
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
         {order && (
           <Modal headerModal="" closeModal={closeOrderModal}>

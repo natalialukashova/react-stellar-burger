@@ -1,14 +1,20 @@
-import React from 'react'
-import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import style from './style.module.css'
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import {
+  Input,
+  Button,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import style from "./style.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function ForgotPassword() {
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-const singInClick = () => {
-    navigate('/login');
-}
+  const singInClick = () => {
+    navigate("/login");
+  };
+  const resetPasswordClick = () => {
+    navigate("/reset-password");
+  };
 
   return (
     <main className={style.main}>
@@ -16,7 +22,12 @@ const singInClick = () => {
       <div className="mb-6">
         <Input type={"email"} placeholder={"Укажите e-mail"} name={"e-mail"} />
       </div>
-      <Button htmlType="button" type="primary" size="medium">
+      <Button
+        htmlType="button"
+        type="primary"
+        size="medium"
+        onClick={resetPasswordClick}
+      >
         Восстановить
       </Button>
       <div className={`mt-20 ${style.footer}`}>
