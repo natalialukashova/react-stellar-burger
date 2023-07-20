@@ -21,13 +21,13 @@ export function useProvideAuth() {
       .then((res) => res.json())
       .then((data) => data);
 
-      if(data.success) {
-        setUser({...data.user, id: data.user._id})
-      }
+    if (data.success) {
+      setUser({ ...data.user, id: data.user._id });
+    }
   };
 
   return {
     user,
     signIn,
-  }
+  };
 }
