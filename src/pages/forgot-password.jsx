@@ -17,10 +17,15 @@ export default function ForgotPassword() {
   };
 
   return (
-    <main className={style.main}>
+    <form className={style.main}>
       <h2 className="text text_type_main-large mb-6">Восстановление пароля</h2>
       <div className="mb-6">
-        <Input type={"email"} placeholder={"Укажите e-mail"} name={"e-mail"} />
+        <Input
+          value={form.email}
+          type={"email"}
+          placeholder={"Укажите e-mail"}
+          name={"e-mail"}
+        />
       </div>
       <Button
         htmlType="button"
@@ -43,6 +48,6 @@ export default function ForgotPassword() {
           Войти
         </Button>
       </div>
-    </main>
+    </form>
   );
 }

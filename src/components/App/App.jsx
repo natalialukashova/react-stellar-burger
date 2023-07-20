@@ -18,6 +18,7 @@ import { RegistrationPage } from "../../pages/register";
 import { LoginPage } from "../../pages/login";
 import ForgotPassword from "../../pages/forgot-password";
 import { ResetPassword } from "../../pages/reset-password";
+import { ProvideAuth } from "../../utils/auth";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -47,28 +48,30 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <div className={styles.app}>
-        <AppHeader />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/register" element={<RegistrationPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-        </Routes>
-        {order && (
-          <Modal headerModal="" closeModal={closeOrderModal}>
-            <OrderDetails order={order} />
-          </Modal>
-        )}
-        {clickedIngredient && (
-          <Modal headerModal="" closeModal={closeIngredientModal}>
-            <IngredientDetails ingredient={clickedIngredient} />
-          </Modal>
-        )}
-      </div>
-    </BrowserRouter>
+    <ProvideAuth>
+      <BrowserRouter>
+        <div className={styles.app}>
+          <AppHeader />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/register" element={<RegistrationPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+          </Routes>
+          {order && (
+            <Modal headerModal="" closeModal={closeOrderModal}>
+              <OrderDetails order={order} />
+            </Modal>
+          )}
+          {clickedIngredient && (
+            <Modal headerModal="" closeModal={closeIngredientModal}>
+              <IngredientDetails ingredient={clickedIngredient} />
+            </Modal>
+          )}
+        </div>
+      </BrowserRouter>
+    </ProvideAuth>
   );
 }
 

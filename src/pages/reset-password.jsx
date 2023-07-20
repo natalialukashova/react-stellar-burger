@@ -1,19 +1,23 @@
-import React from 'react'
-import style from './style.module.css'
-import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import style from "./style.module.css";
+import {
+  Input,
+  Button,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import { useNavigate } from "react-router-dom";
 
 export function ResetPassword() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const singInClick = () => {
-      navigate("/login");
-    };
+  const singInClick = () => {
+    navigate("/login");
+  };
   return (
-    <main className={style.main}>
+    <form className={style.main}>
       <h2 className="text text_type_main-large mb-6">Восстановление пароля</h2>
       <div className="mb-6">
         <Input
+          value={form.password}
           type={"password"}
           placeholder={"Введите новый пароль"}
           name={"newPassword"}
@@ -22,6 +26,7 @@ export function ResetPassword() {
       </div>
       <div className="mb-6">
         <Input
+          value={form.code}
           type={"text"}
           placeholder={"Введите код из пильма"}
           name={"code"}
@@ -43,6 +48,6 @@ export function ResetPassword() {
           Войти
         </Button>
       </div>
-    </main>
+    </form>
   );
 }

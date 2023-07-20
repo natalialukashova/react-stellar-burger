@@ -1,8 +1,9 @@
 export class Api {
-  constructor({ baseUrl, ingredients, order }) {
+  constructor({ baseUrl, ingredients, order, login }) {
     this._baseUrl = baseUrl;
     this._ingredients = ingredients;
     this._order = order;
+    this._login = login;
   }
 
   _checkResponse(res) {
@@ -35,12 +36,28 @@ export class Api {
       }),
     }).then(this._checkResponse);
   };
+
+  loginRequect = async (form) => {
+    return await fetch(`${this._baseUrl}${this._login}`, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(form),
+    });
+  };
 }
 
 const config = {
   baseUrl: "https://norma.nomoreparties.space/api",
   ingredients: "/ingredients",
   order: "/orders",
+  login: "/auth/login",
 };
 
 const api = new Api(config);

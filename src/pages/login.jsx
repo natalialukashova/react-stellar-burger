@@ -1,34 +1,67 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./style.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
+import { useAuth } from "../utils/auth";
 
 export function LoginPage() {
+  // навигация по страницам
   const navigate = useNavigate();
 
-const registrationButtonClick = () => {
-    navigate('/register')
-}
+  const registrationButtonClick = () => {
+    navigate("/register");
+  };
 
-const resetPasswordClick = () => {
+  const resetPasswordClick = () => {
     navigate("/forgot-password");
-}
+  };
+
+  // авторизация пользователя
+  let auth = useAuth();
+
+  const [form, setValue] = useState({ email: "", password: "" });
+
+  const onChange = (e) => {
+    setValue({ ...form, [e.target.name]: e.target.value });
+  };
+
+  let login = useCallback(
+    (e) => {
+      e.preventDefault();
+      auth.signIn(form);
+    },
+    [auth, form]
+  );
+
+  if (auth.user) {
+    return (
+      <Navigate to={'/'} />
+    )
+  }
 
   return (
-    <main className={style.main}>
+    <form className={style.main}>
       <h2 className="text text_type_main-large mb-6">Вход</h2>
       <div className="mb-6">
-        <Input type={"email"} placeholder={"E-mail"} name={"e-mail"} />
+        <Input
+          value={form.email}
+          type={"email"}
+          placeholder={"E-mail"}
+          name={"e-mail"}
+          onChange={onChange}
+        />
       </div>
       <div className="mb-6">
         <Input
+          value={form.password}
           type={"password"}
           placeholder={"Пароль"}
           name={"password"}
           icon="ShowIcon"
+          onChange={onChange}
         />
       </div>
       <Button htmlType="button" type="primary" size="medium">
@@ -60,6 +93,6 @@ const resetPasswordClick = () => {
           Восстановить пароль
         </Button>
       </div>
-    </main>
+    </form>
   );
 }

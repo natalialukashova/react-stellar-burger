@@ -15,16 +15,27 @@ export function RegistrationPage() {
   };
 
   return (
-    <main className={style.main}>
+    <form className={style.main}>
       <h2 className="text text_type_main-large mb-6">Регистрация</h2>
       <div className="mb-6">
-        <Input type={"text"} placeholder={"Имя"} name={"name"} />
-      </div>
-      <div className="mb-6">
-        <Input type={"email"} placeholder={"E-mail"} name={"e-mail"} />
+        <Input
+          value={form.name}
+          type={"text"}
+          placeholder={"Имя"}
+          name={"name"}
+        />
       </div>
       <div className="mb-6">
         <Input
+          value={form.email}
+          type={"email"}
+          placeholder={"E-mail"}
+          name={"e-mail"}
+        />
+      </div>
+      <div className="mb-6">
+        <Input
+          value={form.password}
           type={"password"}
           placeholder={"Пароль"}
           name={"password"}
@@ -38,10 +49,15 @@ export function RegistrationPage() {
         <p className="text text_type_main-default text_color_inactive">
           Уже зарегистированы?
         </p>
-        <Button htmlType="button" type="secondary" size="medium" onClick={singInClick}>
+        <Button
+          htmlType="button"
+          type="secondary"
+          size="medium"
+          onClick={singInClick}
+        >
           Войти
         </Button>
       </div>
-    </main>
+    </form>
   );
 }
