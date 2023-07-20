@@ -37,9 +37,7 @@ export function LoginPage() {
   );
 
   if (auth.user) {
-    return (
-      <Navigate to={'/'} />
-    )
+    return <Navigate to={"/"} />;
   }
 
   return (
@@ -50,7 +48,7 @@ export function LoginPage() {
           value={form.email}
           type={"email"}
           placeholder={"E-mail"}
-          name={"e-mail"}
+          name={"email"}
           onChange={onChange}
         />
       </div>
@@ -64,7 +62,7 @@ export function LoginPage() {
           onChange={onChange}
         />
       </div>
-      <Button htmlType="button" type="primary" size="medium">
+      <Button onClick={login} htmlType="button" type="primary" size="medium">
         Войти
       </Button>
       <div className={`mt-20 ${style.footer}`}>
