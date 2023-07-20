@@ -22,7 +22,7 @@ export function LoginPage() {
   // авторизация пользователя
   let auth = useAuth();
 
-  const [form, setValue] = useState({ email: "", password: "" });
+  const [form, setValue] = useState(() => ({ email: "", password: ""}));
 
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
