@@ -28,7 +28,7 @@ export function useProvideAuth() {
 
   const signIn = async (form) => {
     const data = await api
-      .loginRequest(form)
+      .loginRequect(form)
       .then((res) => {
         let authToken;
 

@@ -49,7 +49,10 @@ export class Api {
       },
       redirect: "follow",
       referrerPolicy: "no-referrer",
-      body: JSON.stringify(form),
+      body: JSON.stringify({
+        email: form.email,
+        password: form.password,
+      }),
     });
   };
 
