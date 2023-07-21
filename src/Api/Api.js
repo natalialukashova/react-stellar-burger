@@ -1,9 +1,10 @@
 export class Api {
-  constructor({ baseUrl, ingredients, order, login }) {
+  constructor({ baseUrl, ingredients, order, login, register }) {
     this._baseUrl = baseUrl;
     this._ingredients = ingredients;
     this._order = order;
     this._login = login;
+    this._register = register;
   }
 
   _checkResponse(res) {
@@ -51,6 +52,25 @@ export class Api {
       body: JSON.stringify(form),
     });
   };
+
+  registerRequest = async (form) => {
+    return await fetch(`${this._baseUrl}${this._register}`, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify({
+        name: form.name,
+        email: form.email,
+        password: form.password,
+      }),
+    });
+  };
 }
 
 const config = {
@@ -58,6 +78,7 @@ const config = {
   ingredients: "/ingredients",
   order: "/orders",
   login: "/auth/login",
+  register: "/auth/register",
 };
 
 const api = new Api(config);
