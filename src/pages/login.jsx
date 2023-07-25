@@ -10,6 +10,7 @@ import { useAuth } from "../utils/auth";
 export function LoginPage() {
   // навигация по страницам
   const navigate = useNavigate();
+  
 
   const registrationButtonClick = () => {
     navigate("/register");

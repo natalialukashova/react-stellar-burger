@@ -1,6 +1,7 @@
 import { useContext, useState, createContext } from "react";
 import { api } from "../Api/Api";
 import { setCookie } from "./setCockie";
+import { deleteCookie } from "./deleteCockie";
 
 const AuthContext = createContext(undefined);
 
@@ -43,9 +44,19 @@ export function useProvideAuth() {
       });
 
     if (data.success) {
-      setUser({ ...data.user, id: data.user._id });
+      setUser({
+        ...data.user,
+        id: data.user._id,
+        refreshToken: data.refreshToken,
+      });
     }
   };
+
+  const signOut = async () => {
+    await api.logoutRequest(user);
+    setUser(null);
+    deleteCookie('token');
+  }
 
   const verificationUser = async (form) => {
     const data = await api
@@ -84,5 +95,6 @@ export function useProvideAuth() {
     verificationUser,
     resetUserPassword,
     updateUser,
+    signOut,
   };
 }

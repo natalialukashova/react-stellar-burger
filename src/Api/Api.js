@@ -10,6 +10,7 @@ export class Api {
     verification,
     resetPassword,
     getUser,
+    logout,
   }) {
     this._baseUrl = baseUrl;
     this._ingredients = ingredients;
@@ -19,6 +20,7 @@ export class Api {
     this._verification = verification;
     this._resetPassword = resetPassword;
     this._getUser = getUser;
+    this._logout = logout;
   }
 
   _checkResponse(res) {
@@ -157,7 +159,25 @@ export class Api {
         password: form.password,
       }),
     });
-  }
+  };
+
+  logoutRequest = async (user) => {
+    return await fetch(`${this._baseUrl}${this._logout}`, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + getCookie("token"),
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify({
+        token: user.refreshToken,
+      })
+    });
+  };
 }
 
 const config = {
@@ -169,6 +189,7 @@ const config = {
   verification: "/password-reset",
   resetPassword: "/password-reset/reset",
   getUser: "/auth/user",
+  logout: "/auth/logout",
 };
 
 const api = new Api(config);
