@@ -1,20 +1,44 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./style.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
+import { useAuth } from "../utils/auth";
 
 export default function ForgotPassword() {
+  // навигация по страницам
   const navigate = useNavigate();
 
   const singInClick = () => {
     navigate("/login");
   };
-  const resetPasswordClick = () => {
-    navigate("/reset-password");
+
+  // проверка пользователя
+  let auth = useAuth();
+
+  const [form, setValue] = useState({ email: "" });
+
+  const onChange = (e) => {
+    setValue({ email: e.target.value });
   };
+
+  console.log(form)
+
+  let verification = useCallback(
+    (e) => {
+      e.preventDefault();
+      auth.verificationUser(form);
+    },
+    [auth, form]
+  );
+
+  if (auth.user) {
+    // return <Navigate to={"/reset-password"} />;
+    console.log(auth.user)
+
+  }
 
   return (
     <form className={style.main}>
@@ -24,14 +48,15 @@ export default function ForgotPassword() {
           value={form.email}
           type={"email"}
           placeholder={"Укажите e-mail"}
-          name={"e-mail"}
+          name={"email"}
+          onChange={onChange}
         />
       </div>
       <Button
         htmlType="button"
         type="primary"
         size="medium"
-        onClick={resetPasswordClick}
+        onClick={verification}
       >
         Восстановить
       </Button>

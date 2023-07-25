@@ -22,7 +22,7 @@ export function useProvideAuth() {
       .then((res) => res.json())
       .then((data) => data);
     if (data.success) {
-      setUser({...data.user, id: data.user._id})
+      setUser({ ...data.user, id: data.user._id });
     }
   };
 
@@ -49,9 +49,20 @@ export function useProvideAuth() {
     }
   };
 
+  const verificationUser = async (form) => {
+    const data = await api
+      .verificationRequect(form)
+      .then((res) => res.json())
+      .then((data) => data);
+    if (data.success) {
+      setUser({ ...data.user, id: data.user._id });
+    }
+  };
+
   return {
     user,
     signIn,
     registrationUser,
+    verificationUser,
   };
 }
