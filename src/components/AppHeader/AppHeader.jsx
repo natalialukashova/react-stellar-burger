@@ -8,8 +8,10 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavLink } from "react-router-dom";
 import RegistrationPage from "../../pages/register";
+import { useAuth } from "../../utils/auth";
 
 export default function AppHeader() {
+  const auth = useAuth()
   return (
     <header className={`${headerStyles.header} pt-4 pb-4`}>
       <nav className={`${headerStyles.menu}`}>
@@ -20,7 +22,10 @@ export default function AppHeader() {
           <BurgerIcon type="primary" />
           <p className="ml-2 text text_type_main-default">Конструктор</p>
         </NavLink>
-        <NavLink href="#" className={`${headerStyles.link} ml-5 mr-5 mb-4 mt-4`}>
+        <NavLink
+          href="#"
+          className={`${headerStyles.link} ml-5 mr-5 mb-4 mt-4`}
+        >
           <ListIcon type="primary" />
           <p className="ml-2 text text_type_main-default">Лента заказов</p>
         </NavLink>
@@ -28,7 +33,7 @@ export default function AppHeader() {
           <Logo />
         </div>
         <NavLink
-          to={{ pathname: "/login" }}
+          to={auth.user ? { pathname: "/profile" } : { pathname: "/login" }}
           className={`${headerStyles.link} ml-5 mr-5 mb-4 mt-4`}
         >
           <ProfileIcon type="primary" />

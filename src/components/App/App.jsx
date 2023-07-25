@@ -19,6 +19,8 @@ import { LoginPage } from "../../pages/login";
 import ForgotPassword from "../../pages/forgot-password";
 import { ResetPassword } from "../../pages/reset-password";
 import { ProvideAuth } from "../../utils/auth";
+import { ProfilePage } from "../../pages/profile"
+import { IngredientPage } from "../../pages/ingredient";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -58,6 +60,8 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/ingredient/:id" element={<IngredientPage />} />
           </Routes>
           {order && (
             <Modal headerModal="" closeModal={closeOrderModal}>

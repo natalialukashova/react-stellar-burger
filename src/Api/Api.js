@@ -1,3 +1,5 @@
+import { getCookie } from "../utils/getCockie";
+
 export class Api {
   constructor({
     baseUrl,
@@ -7,6 +9,7 @@ export class Api {
     register,
     verification,
     resetPassword,
+    getUser,
   }) {
     this._baseUrl = baseUrl;
     this._ingredients = ingredients;
@@ -15,6 +18,7 @@ export class Api {
     this._register = register;
     this._verification = verification;
     this._resetPassword = resetPassword;
+    this._getUser = getUser;
   }
 
   _checkResponse(res) {
@@ -118,6 +122,41 @@ export class Api {
         token: form.token,
       }),
     });
+  };
+
+  getUserRequest = async () => {
+    return await fetch(`${this._baseUrl}${this._getUser}`, {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + getCookie("token"),
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+    });
+  };
+
+  patchUserRequest = async (form) => {
+    return await fetch(`${this._baseUrl}${this._getUser}`, {
+      method: "PATCH",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + getCookie("token"),
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify({
+        name: form.name,
+        email: form.email,
+        password: form.password,
+      }),
+    });
   }
 }
 
@@ -129,6 +168,7 @@ const config = {
   register: "/auth/register",
   verification: "/password-reset",
   resetPassword: "/password-reset/reset",
+  getUser: "/auth/user",
 };
 
 const api = new Api(config);

@@ -30,19 +30,17 @@ export function useProvideAuth() {
     const data = await api
       .loginRequect(form)
       .then((res) => {
-        let authToken;
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        const authToken = data.accessToken.split("Bearer ")[1];
 
-        res.headers.forEach((header) => {
-          if (header.indexOf("Bearer") === 0) {
-            authToken = header.split("Bearer ")[1];
-          }
-        });
         if (authToken) {
           setCookie("token", authToken);
         }
-        return res.json();
-      })
-      .then((data) => data);
+        return data;
+      });
 
     if (data.success) {
       setUser({ ...data.user, id: data.user._id });
@@ -64,9 +62,19 @@ export function useProvideAuth() {
       .resetPasswordRequest(form)
       .then((res) => res.json())
       .then((data) => data);
-      if (data.success) {
-        setUser({ ...data.user, passwod: data.user.password });
-      }
+    if (data.success) {
+      setUser({ ...data.user, password: data.user.password });
+    }
+  };
+
+  const updateUser = async (form) => {
+    const data = await api
+      .patchUserRequest(form)
+      .then((res) => res.json())
+      .then((data) => data);
+    if (data.success) {
+      setUser({ name: data.user.name, email: data.user.email, password: data.user.password });
+    }
   };
 
   return {
@@ -75,5 +83,6 @@ export function useProvideAuth() {
     registrationUser,
     verificationUser,
     resetUserPassword,
+    updateUser,
   };
 }
