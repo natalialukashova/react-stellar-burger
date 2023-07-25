@@ -13,13 +13,18 @@ import {
 import { clickIngredient } from "../../services/IngredientSlice";
 import { useDrag } from "react-dnd";
 import { ingredientPropType } from "../../utils/prop-types";
+import { useLocation, Link } from "react-router-dom";
 
-export default function IngredientCard({ingredient}) {
+export default function IngredientCard({ ingredient }) {
   const dispatch = useDispatch();
   const { image, name, price } = ingredient;
 
+  const location = useLocation();
+  const background = location.state && location.state.background;
+
   function onClick() {
     dispatch(clickIngredient(ingredient));
+    document.location.pathname = `/ingredients/${ingredient._id}`
   }
 
   const bun = useSelector(selectConstructorBuns);
@@ -33,25 +38,25 @@ export default function IngredientCard({ingredient}) {
   };
 
   const [, dragRef] = useDrag({
-    type: 'ingredient',
+    type: "ingredient",
     item: ingredient,
   });
 
   return (
     <div className={`${cardStyle.card} mb-8`} onClick={onClick} ref={dragRef}>
-      <img src={image} alt={name} />
-      <div className={`${cardStyle.price} mt-1`}>
-        <p className="text text_type_main-default">{price}</p>
-        <CurrencyIcon />
-      </div>
-      <p className={`${cardStyle.name} text text_type_main-default mt-1`}>
-        {name}
-      </p>
-      <Counter count={count(ingredient)} />
+        <img src={image} alt={name} />
+        <div className={`${cardStyle.price} mt-1`}>
+          <p className="text text_type_main-default">{price}</p>
+          <CurrencyIcon />
+        </div>
+        <p className={`${cardStyle.name} text text_type_main-default mt-1`}>
+          {name}
+        </p>
+        <Counter count={count(ingredient)} />
     </div>
   );
 }
 
 IngredientCard.propTypes = {
   ingredient: ingredientPropType,
-}
+};

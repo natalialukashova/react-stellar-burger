@@ -13,16 +13,17 @@ import { selectedIngredient } from "../../services/IngredientSlice";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { clearIngredient } from "../../services/IngredientSlice";
 import { loadIngredients } from "../../services/IngredientSlice";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, Outlet } from "react-router-dom";
 import { RegistrationPage } from "../../pages/register";
 import { LoginPage } from "../../pages/login";
 import ForgotPassword from "../../pages/forgot-password";
 import { ResetPassword } from "../../pages/reset-password";
-import { ProvideAuth } from "../../utils/auth";
-import { ProfilePage } from "../../pages/profile"
+import { ProfilePage } from "../../pages/profile";
 import { IngredientPage } from "../../pages/ingredient";
 
 function App() {
+  const location = useLocation();
+
   const [ingredients, setIngredients] = useState([]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [headerModal, setheaderModal] = React.useState("");
@@ -30,6 +31,8 @@ function App() {
   const order = useSelector(selectOrder);
   const clickedIngredient = useSelector(selectedIngredient);
   const dispatch = useDispatch();
+
+  const background = location.state && location.state.background;
 
   function openModal(modalHeaderName = "", mainModal) {
     setChildModal(mainModal);
@@ -49,33 +52,43 @@ function App() {
     dispatch(loadIngredients());
   }, []);
 
+  console.log(background, location);
+
   return (
-    <ProvideAuth>
-      <BrowserRouter>
-        <div className={styles.app}>
-          <AppHeader />
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/register" element={<RegistrationPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/ingredient/:id" element={<IngredientPage />} />
-          </Routes>
-          {order && (
-            <Modal headerModal="" closeModal={closeOrderModal}>
-              <OrderDetails order={order} />
-            </Modal>
-          )}
-          {clickedIngredient && (
-            <Modal headerModal="" closeModal={closeIngredientModal}>
-              <IngredientDetails ingredient={clickedIngredient} />
-            </Modal>
-          )}
-        </div>
-      </BrowserRouter>
-    </ProvideAuth>
+    <div className={styles.app}>
+      <AppHeader />
+      <Routes location={background || location}>
+        <Route path="/" element={<Main />} />
+        <Route path="/register" element={<RegistrationPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route
+          path="/ingredients/:id"
+          state={{ background: location }}
+          element={<IngredientPage />}
+        />
+      </Routes>
+      {order && (
+        <Modal headerModal="" closeModal={closeOrderModal}>
+          <OrderDetails order={order} />
+        </Modal>
+      )}
+      {background && (
+        <Routes>
+          <Route
+            element={
+              <Modal headerModal="" closeModal={closeIngredientModal}>
+                <Outlet />
+              </Modal>
+            }
+          >
+            <Route path="/ingredients/:id"></Route>
+          </Route>
+        </Routes>
+      )}
+    </div>
   );
 }
 
