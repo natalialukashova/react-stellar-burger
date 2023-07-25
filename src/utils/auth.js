@@ -38,7 +38,7 @@ export function useProvideAuth() {
         const authToken = data.accessToken.split("Bearer ")[1];
 
         if (authToken) {
-          setCookie("token", authToken);
+          setCookie("token", authToken, { expires: 1200 });
         }
         return data;
       });
