@@ -24,21 +24,14 @@ export default function ForgotPassword() {
     setValue({ email: e.target.value });
   };
 
-  console.log(form)
-
   let verification = useCallback(
     (e) => {
       e.preventDefault();
       auth.verificationUser(form);
+      navigate("/reset-password");
     },
     [auth, form]
   );
-
-  if (auth.user) {
-    // return <Navigate to={"/reset-password"} />;
-    console.log(auth.user)
-
-  }
 
   return (
     <form className={style.main}>

@@ -59,10 +59,21 @@ export function useProvideAuth() {
     }
   };
 
+  const resetUserPassword = async (form) => {
+    const data = await api
+      .resetPasswordRequest(form)
+      .then((res) => res.json())
+      .then((data) => data);
+      if (data.success) {
+        setUser({ ...data.user, passwod: data.user.password });
+      }
+  };
+
   return {
     user,
     signIn,
     registrationUser,
     verificationUser,
+    resetUserPassword,
   };
 }

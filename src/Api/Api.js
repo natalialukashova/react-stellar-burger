@@ -1,11 +1,20 @@
 export class Api {
-  constructor({ baseUrl, ingredients, order, login, register, verification }) {
+  constructor({
+    baseUrl,
+    ingredients,
+    order,
+    login,
+    register,
+    verification,
+    resetPassword,
+  }) {
     this._baseUrl = baseUrl;
     this._ingredients = ingredients;
     this._order = order;
     this._login = login;
     this._register = register;
     this._verification = verification;
+    this._resetPassword = resetPassword;
   }
 
   _checkResponse(res) {
@@ -92,6 +101,24 @@ export class Api {
       }),
     });
   };
+
+  resetPasswordRequest = async (form) => {
+    return await fetch(`${this._baseUrl}${this._resetPassword}`, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify({
+        password: form.password,
+        token: form.token,
+      }),
+    });
+  }
 }
 
 const config = {
@@ -101,6 +128,7 @@ const config = {
   login: "/auth/login",
   register: "/auth/register",
   verification: "/password-reset",
+  resetPassword: "/password-reset/reset",
 };
 
 const api = new Api(config);
