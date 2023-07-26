@@ -35,7 +35,6 @@ export function ProfilePage() {
           password: data.user.password || "",
         })
       );
-    console.log(user);
   }, []);
 
   const onClickForUpdate = useCallback(

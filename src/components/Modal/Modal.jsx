@@ -12,7 +12,7 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 
 const modalRoot = document.getElementById("modal");
 
-export default function Modal({ closeModal, children, headerModal = "" }) {
+export default function Modal({ closeModal, headerModal = "" }) {
   const closeEsc = React.useCallback(
     (evt) => {
       if (evt.key === "Escape") {
@@ -57,7 +57,6 @@ export default function Modal({ closeModal, children, headerModal = "" }) {
 }
 
 Modal.propTypes = {
-  children: PropTypes.element,
   closeModal: PropTypes.func,
   headerModal: PropTypes.string,
 };

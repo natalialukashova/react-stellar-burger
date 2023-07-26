@@ -51,8 +51,6 @@ export default function BurgerConstructor() {
     },
   });
 
-  // сортировка внутри ингредиентов
-
   return (
     <section className={`${constuctorStyle.content} mt-25 ml-4`} ref={dropBox}>
       {Object.keys(bun).length === 0 && fillings.length === 0 ? (

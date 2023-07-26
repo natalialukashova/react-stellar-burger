@@ -58,7 +58,7 @@ function App() {
     dispatch(loadIngredients());
   }, []);
 
-  console.log(background, location);
+  console.log(order);
 
   return (
     <div className={styles.app}>
