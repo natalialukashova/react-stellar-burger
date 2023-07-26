@@ -13,7 +13,7 @@ import { selectedIngredient } from "../../services/IngredientSlice";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { clearIngredient } from "../../services/IngredientSlice";
 import { loadIngredients } from "../../services/IngredientSlice";
-import { Routes, Route, useLocation, Outlet } from "react-router-dom";
+import { Routes, Route, useLocation, Outlet, useNavigate } from "react-router-dom";
 import { RegistrationPage } from "../../pages/register";
 import { LoginPage } from "../../pages/login";
 import ForgotPassword from "../../pages/forgot-password";
@@ -34,6 +34,7 @@ function App() {
   const dispatch = useDispatch();
 
   const background = location.state && location.state.background;
+  const navigate = useNavigate()
 
   function openModal(modalHeaderName = "", mainModal) {
     setChildModal(mainModal);
@@ -45,9 +46,13 @@ function App() {
     dispatch(clearOrder());
   }, []);
 
-  const closeIngredientModal = React.useCallback(() => {
-    dispatch(clearIngredient());
-  });
+  // const closeIngredientModal = React.useCallback(() => {
+  //   dispatch(clearIngredient());
+  //   location.state.background = null;
+  //   setIsModalOpen(false);
+  // });
+
+  const onModalClose = () => navigate(-1);
 
   useEffect(() => {
     dispatch(loadIngredients());
@@ -68,11 +73,7 @@ function App() {
           path="/profile"
           element={<ProtectedRouteElement element={<ProfilePage />} />}
         />
-        <Route
-          path="/ingredients/:id"
-          state={{ background: location }}
-          element={<IngredientPage />}
-        />
+        <Route path="/ingredients/:id" element={<IngredientPage />} />
       </Routes>
       {order && (
         <Modal headerModal="" closeModal={closeOrderModal}>
@@ -83,7 +84,7 @@ function App() {
         <Routes>
           <Route
             element={
-              <Modal headerModal="" closeModal={closeIngredientModal}>
+              <Modal headerModal="" closeModal={onModalClose}>
                 <Outlet />
               </Modal>
             }

@@ -55,6 +55,7 @@ export const selectIngredients = (state) => ({
 });
 
 export const selectIngredient = (id) => (state) => {
+  console.log(state[SLICE]);
   return state[SLICE].ingredients.filter((item) => item._id === id).pop();
 };
 

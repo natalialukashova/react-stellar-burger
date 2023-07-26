@@ -22,11 +22,6 @@ export default function IngredientCard({ ingredient }) {
   const location = useLocation();
   const background = location.state && location.state.background;
 
-  function onClick() {
-    dispatch(clickIngredient(ingredient));
-    document.location.pathname = `/ingredients/${ingredient._id}`
-  }
-
   const bun = useSelector(selectConstructorBuns);
   const fillings = useSelector(selectConstructorIngredients);
 
@@ -43,7 +38,12 @@ export default function IngredientCard({ ingredient }) {
   });
 
   return (
-    <div className={`${cardStyle.card} mb-8`} onClick={onClick} ref={dragRef}>
+    <Link
+      to={`/ingredients/${ingredient._id}`}
+      state={{ background: location }}
+      ref={dragRef}
+      className={`${cardStyle.card} mb-8`}
+    >
         <img src={image} alt={name} />
         <div className={`${cardStyle.price} mt-1`}>
           <p className="text text_type_main-default">{price}</p>
@@ -53,7 +53,7 @@ export default function IngredientCard({ ingredient }) {
           {name}
         </p>
         <Counter count={count(ingredient)} />
-    </div>
+    </Link>
   );
 }
 
