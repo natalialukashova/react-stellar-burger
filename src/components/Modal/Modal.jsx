@@ -59,6 +59,7 @@ export default function Modal({ closeModal, children, headerModal = "" }) {
 }
 
 Modal.propTypes = {
+  children: PropTypes.element,
   closeModal: PropTypes.func,
   headerModal: PropTypes.string,
 };
