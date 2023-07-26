@@ -12,7 +12,7 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 
 const modalRoot = document.getElementById("modal");
 
-export default function Modal({ closeModal, headerModal = "" }) {
+export default function Modal({ closeModal, children, headerModal = "" }) {
   const closeEsc = React.useCallback(
     (evt) => {
       if (evt.key === "Escape") {
@@ -47,7 +47,9 @@ export default function Modal({ closeModal, headerModal = "" }) {
               <CloseIcon type="primary" onClick={closeModal} />
             </div>
           </div>
-          {ingredient && <IngredientDetails ingredient={ingredient} />}
+          {ingredient
+            ? ingredient && <IngredientDetails ingredient={ingredient} />
+            : children}
         </div>
       </div>
       <ModalOverlay closeModal={closeModal} />
