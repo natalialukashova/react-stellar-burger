@@ -20,6 +20,7 @@ import ForgotPassword from "../../pages/forgot-password";
 import { ResetPassword } from "../../pages/reset-password";
 import { ProfilePage } from "../../pages/profile";
 import { IngredientPage } from "../../pages/ingredient";
+import ProtectedRouteElement from "../ProtectedRouteElement/ProtectedRouteElement";
 
 function App() {
   const location = useLocation();
@@ -63,7 +64,10 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route
+          path="/profile"
+          element={<ProtectedRouteElement element={<ProfilePage />} />}
+        />
         <Route
           path="/ingredients/:id"
           state={{ background: location }}
