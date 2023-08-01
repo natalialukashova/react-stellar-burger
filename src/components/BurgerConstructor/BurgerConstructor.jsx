@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendOrder } from "../../services/ConstuctorSlice";
 import { useDrop } from "react-dnd";
 import ConstructorItem from "../ConstructorItem/ConstructorItem";
+import { useAuth } from "../../utils/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -25,8 +27,16 @@ export default function BurgerConstructor() {
   const ingredientsList = fillings.map((item) => item._id);
   ingredientsList.unshift(bun._id);
 
+  const auth = useAuth();
+  const navigate = useNavigate();
+
   function onClick() {
-    dispatch(sendOrder(ingredientsList));
+    if (!auth.user) {
+      navigate('/login');
+    } else {
+      dispatch(sendOrder(ingredientsList));
+    }
+
   }
 
   const calculateTotal = (bun, fillings = []) =>
@@ -79,10 +89,10 @@ export default function BurgerConstructor() {
             className="ml-8"
           />
           <ul className={`${constuctorStyle.section} mt-4 mb-4 pr-4`}>
-              {fillings.map((item, index) => (
-                // тут ингредиенты мапятся
-                <ConstructorItem key={item.uniqueId} item={item} index={index} />
-              ))}
+            {fillings.map((item, index) => (
+              // тут ингредиенты мапятся
+              <ConstructorItem key={item.uniqueId} item={item} index={index} />
+            ))}
           </ul>
           <ConstructorElement
             type="bottom"
