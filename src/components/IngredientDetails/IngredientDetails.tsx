@@ -1,6 +1,6 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import detailsStyle from "../IngredientDetails/IngredientDetails.module.css";
-import { ingredientPropType } from "../../utils/prop-types";
+import { TIngredient } from "../../utils/types";
 
 export default function IngredientDetails({ ingredient: {
   name,
@@ -9,7 +9,7 @@ export default function IngredientDetails({ ingredient: {
   proteins,
   fat,
   carbohydrates,
-}}) {
+}}: TIngredient): ReactElement {
   return (
     <div className={detailsStyle.section}>
       <p className="text text_type_main-large">Детали ингредиента</p>
@@ -43,7 +43,3 @@ export default function IngredientDetails({ ingredient: {
     </div>
   );
 }
-
-IngredientDetails.propTypes = {
-  ingredient: ingredientPropType,
-};
