@@ -6,14 +6,20 @@ import reportWebVitals from "./reportWebVitals";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { ProvideAuth } from "./utils/auth";
+import { BrowserRouter } from "react-router-dom";
 
-const container = document.getElementById('root');
-const root = createRoot(container)
+const container = document.getElementById("root");
+const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ProvideAuth>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ProvideAuth>
     </Provider>
   </React.StrictMode>
 );

@@ -1,0 +1,22 @@
+.profile {
+  display: flex;
+  flex-direction: row;
+  margin: 120px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.fillings {
+  display: flex;
+  width: 1280px;
+  margin: 0 auto;
+}
+
+.p {
+    width: 320px;
+    height: 64px;
+    cursor: pointer;
+}

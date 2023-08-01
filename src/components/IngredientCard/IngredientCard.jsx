@@ -13,14 +13,14 @@ import {
 import { clickIngredient } from "../../services/IngredientSlice";
 import { useDrag } from "react-dnd";
 import { ingredientPropType } from "../../utils/prop-types";
+import { useLocation, Link } from "react-router-dom";
 
-export default function IngredientCard({ingredient}) {
+export default function IngredientCard({ ingredient }) {
   const dispatch = useDispatch();
   const { image, name, price } = ingredient;
 
-  function onClick() {
-    dispatch(clickIngredient(ingredient));
-  }
+  const location = useLocation();
+  const background = location.state && location.state.background;
 
   const bun = useSelector(selectConstructorBuns);
   const fillings = useSelector(selectConstructorIngredients);
@@ -33,25 +33,30 @@ export default function IngredientCard({ingredient}) {
   };
 
   const [, dragRef] = useDrag({
-    type: 'ingredient',
+    type: "ingredient",
     item: ingredient,
   });
 
   return (
-    <div className={`${cardStyle.card} mb-8`} onClick={onClick} ref={dragRef}>
-      <img src={image} alt={name} />
-      <div className={`${cardStyle.price} mt-1`}>
-        <p className="text text_type_main-default">{price}</p>
-        <CurrencyIcon />
-      </div>
-      <p className={`${cardStyle.name} text text_type_main-default mt-1`}>
-        {name}
-      </p>
-      <Counter count={count(ingredient)} />
-    </div>
+    <Link
+      to={`/ingredients/${ingredient._id}`}
+      state={{ background: location }}
+      ref={dragRef}
+      className={`${cardStyle.card} mb-8`}
+    >
+        <img src={image} alt={name} />
+        <div className={`${cardStyle.price} mt-1`}>
+          <p className="text text_type_main-default">{price}</p>
+          <CurrencyIcon />
+        </div>
+        <p className={`${cardStyle.name} text text_type_main-default mt-1`}>
+          {name}
+        </p>
+        <Counter count={count(ingredient)} />
+    </Link>
   );
 }
 
 IngredientCard.propTypes = {
   ingredient: ingredientPropType,
-}
+};

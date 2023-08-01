@@ -1,0 +1,15 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 480px;
+    align-items: center;
+    margin: auto;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+}

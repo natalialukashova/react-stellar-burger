@@ -5,6 +5,10 @@ import modalStyle from "../Modal/Modal.module.css";
 import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectIngredient } from "../../services/IngredientSlice";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
 
 const modalRoot = document.getElementById("modal");
 
@@ -26,6 +30,11 @@ export default function Modal({ closeModal, children, headerModal = "" }) {
     };
   }, []);
 
+    const params = useParams();
+    const ingredient = useSelector(selectIngredient(params.id));
+
+    console.log();
+
   return ReactDOM.createPortal(
     <>
       <div className={`${modalStyle.modal} `}>
@@ -38,7 +47,9 @@ export default function Modal({ closeModal, children, headerModal = "" }) {
               <CloseIcon type="primary" onClick={closeModal} />
             </div>
           </div>
-          {children}
+          {ingredient
+            ? ingredient && <IngredientDetails ingredient={ingredient} />
+            : children}
         </div>
       </div>
       <ModalOverlay closeModal={closeModal} />

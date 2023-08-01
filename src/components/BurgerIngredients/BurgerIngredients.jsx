@@ -17,23 +17,23 @@ export default function BurgerIngredients() {
   const bunsRef = useRef(null);
   const saucesRef = useRef(null);
   const mainsRef = useRef(null);
-  const baseRef = useRef()
+  const baseRef = useRef();
 
   const buns = items.filter((item) => item.type === "bun");
   const sauces = items.filter((item) => item.type === "sauce");
   const main = items.filter((item) => item.type === "main");
 
-  const [ bunsWatchRef, inViewBuns ] = useInView({
+  const [bunsWatchRef, inViewBuns] = useInView({
     threshold: 0.5,
     root: baseRef.current,
   });
 
-  const [ saucesWatchRef, inVievSauces ] = useInView({
+  const [saucesWatchRef, inVievSauces] = useInView({
     threshold: 1,
     root: baseRef.current,
   });
 
-  const [ mainsWatchRef, inViewMain ] = useInView({
+  const [mainsWatchRef, inViewMain] = useInView({
     threshold: 0.5,
     root: baseRef.current,
   });
@@ -85,7 +85,10 @@ export default function BurgerIngredients() {
             </h3>
             <div className={ingredientStyles.cardList} ref={bunsWatchRef}>
               {buns.map((item) => (
-                <IngredientCard key={item._id} ingredient={item} />
+                <IngredientCard
+                  key={item._id}
+                  ingredient={item}
+                />
               ))}
             </div>
 
@@ -97,7 +100,10 @@ export default function BurgerIngredients() {
             </h3>
             <div className={ingredientStyles.cardList} ref={saucesWatchRef}>
               {sauces.map((item) => (
-                <IngredientCard key={item._id} ingredient={item} />
+                <IngredientCard
+                  key={item._id}
+                  ingredient={item}
+                />
               ))}
             </div>
 
@@ -109,7 +115,10 @@ export default function BurgerIngredients() {
             </h3>
             <div className={ingredientStyles.cardList} ref={mainsWatchRef}>
               {main.map((item) => (
-                <IngredientCard key={item._id} ingredient={item} />
+                <IngredientCard
+                  key={item._id}
+                  ingredient={item}
+                />
               ))}
             </div>
           </>

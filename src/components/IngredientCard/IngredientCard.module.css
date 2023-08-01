@@ -5,6 +5,8 @@
    max-width: 272px;
    cursor: pointer;
    position: relative;
+   text-decoration: none;
+   color: #fff;
 }
 
 .price {
