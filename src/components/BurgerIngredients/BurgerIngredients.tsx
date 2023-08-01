@@ -9,6 +9,24 @@ import {
   selectIngredients,
 } from "../../services/IngredientSlice";
 import { useInView } from "react-intersection-observer";
+import { TIngredient } from "../../utils/types";
+
+type ingredient = {
+    _id: string;
+    name: string;
+    price: number;
+    type: string;
+    calories: number;
+    carbohydrates: number;
+    fat: number;
+    proteins: number;
+    image: string;
+    image_large: string;
+    image_mobile: string;
+    __v: number;
+    uuid?: string;
+    index?: number;
+  };
 
 export default function BurgerIngredients() {
   const [current, setCurrent] = React.useState();
@@ -19,9 +37,9 @@ export default function BurgerIngredients() {
   const mainsRef = useRef(null);
   const baseRef = useRef();
 
-  const buns = items.filter((item) => item.type === "bun");
-  const sauces = items.filter((item) => item.type === "sauce");
-  const main = items.filter((item) => item.type === "main");
+  const buns = items.filter((item: ingredient) => item.type === "bun");
+  const sauces = items.filter((item: ingredient) => item.type === "sauce");
+  const main = items.filter((item: ingredient) => item.type === "main");
 
   const [bunsWatchRef, inViewBuns] = useInView({
     threshold: 0.5,
@@ -85,10 +103,7 @@ export default function BurgerIngredients() {
             </h3>
             <div className={ingredientStyles.cardList} ref={bunsWatchRef}>
               {buns.map((item) => (
-                <IngredientCard
-                  key={item._id}
-                  ingredient={item}
-                />
+                <IngredientCard key={item._id} ingredient={item} />
               ))}
             </div>
 
@@ -100,10 +115,7 @@ export default function BurgerIngredients() {
             </h3>
             <div className={ingredientStyles.cardList} ref={saucesWatchRef}>
               {sauces.map((item) => (
-                <IngredientCard
-                  key={item._id}
-                  ingredient={item}
-                />
+                <IngredientCard key={item._id} ingredient={item} />
               ))}
             </div>
 
@@ -115,10 +127,7 @@ export default function BurgerIngredients() {
             </h3>
             <div className={ingredientStyles.cardList} ref={mainsWatchRef}>
               {main.map((item) => (
-                <IngredientCard
-                  key={item._id}
-                  ingredient={item}
-                />
+                <IngredientCard key={item._id} ingredient={item} />
               ))}
             </div>
           </>

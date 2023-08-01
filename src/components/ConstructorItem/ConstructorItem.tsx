@@ -13,12 +13,15 @@ import constuctorStyle from "../BurgerConstructor/BurgerConstructor.module.css";
 import { moveInArray } from "../../utils/moveInArray";
 import { selectConstructorIngredients } from "../../services/ConstuctorSlice";
 import { ingredientPropType } from "../../utils/prop-types";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
+import { TConstructor, TIngredient } from "../../utils/types";
 
-function ConstructorItem({ item, index }) {
+
+
+function ConstructorItem({ item, index }: TConstructor) {
   const dispatch = useDispatch();
   const fillings = useSelector(selectConstructorIngredients);
-  const ref = useRef(null);
+  const ref = useRef<HTMLLIElement>(null);
 
   const [{ handlerId }, drop] = useDrop({
     accept: "card",
@@ -27,7 +30,7 @@ function ConstructorItem({ item, index }) {
         handlerId: index,
       };
     },
-    drop(item) {
+    drop(item: TConstructor) {
       if (!ref.current) {
         return;
       }
@@ -77,6 +80,6 @@ function ConstructorItem({ item, index }) {
 ConstructorItem.propTypes = {
   item: ingredientPropType,
   index: PropTypes.number,
-}
+};
 
 export default React.memo(ConstructorItem);

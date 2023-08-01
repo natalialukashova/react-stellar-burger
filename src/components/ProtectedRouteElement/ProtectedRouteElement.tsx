@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { useAuth } from "../../utils/auth";
 import PropTypes from "prop-types";
 import { api } from "../../Api/Api";
+import { TElement } from "../../utils/types";
 
-export default function ProtectedRouteElement({element}) {
+export default function ProtectedRouteElement({element}: TElement): ReactElement | null {
   const [isUserLoaded, setUserLoaded] = useState(false);
 
   const init = async () => {

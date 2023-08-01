@@ -1,18 +1,17 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import ReactDOM from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import modalStyle from "../Modal/Modal.module.css";
-import PropTypes from "prop-types";
-import { ingredientPropType } from "../../utils/prop-types";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIngredient } from "../../services/IngredientSlice";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import { TModal } from "../../utils/types";
 
-const modalRoot = document.getElementById("modal");
+const modalRoot: any = document.getElementById("modal");
 
-export default function Modal({ closeModal, children, headerModal = "" }) {
+export default function Modal({ closeModal, children, headerModal = "" }: TModal): ReactElement | null {
   const closeEsc = React.useCallback(
     (evt) => {
       if (evt.key === "Escape") {
@@ -57,9 +56,3 @@ export default function Modal({ closeModal, children, headerModal = "" }) {
     modalRoot
   );
 }
-
-Modal.propTypes = {
-  children: PropTypes.element,
-  closeModal: PropTypes.func,
-  headerModal: PropTypes.string,
-};

@@ -1,11 +1,12 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import orderStyles from "../OrderDetails/OrderDetails.module.css";
 import done from "../../images/done.svg";
-import PropTypes from "prop-types";
+import { TOrder } from "../../utils/types";
 
-export default function OrderDetails({order}) {
+export default function OrderDetails({order}: TOrder): ReactElement {
   const orderNumber = order.order.number;
   const name = order.name;
+  console.log(order)
 
   return (
     <div className={`${orderStyles.section} `}>
@@ -21,7 +22,3 @@ export default function OrderDetails({order}) {
     </div>
   );
 }
-
-OrderDetails.propTypes = {
-  order: PropTypes.object.isRequired,
-};
