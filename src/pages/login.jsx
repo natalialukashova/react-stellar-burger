@@ -21,7 +21,7 @@ export function LoginPage() {
   };
 
   // авторизация пользователя
-  let auth = useAuth();
+  const auth = useAuth();
 
   const [form, setValue] = useState(() => ({ email: "", password: ""}));
 
@@ -29,7 +29,7 @@ export function LoginPage() {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
-  let login = useCallback(
+  const login = useCallback(
     (e) => {
       e.preventDefault();
       auth.signIn(form);
