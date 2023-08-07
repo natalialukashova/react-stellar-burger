@@ -1,20 +1,29 @@
-import { useContext, useState, createContext } from "react";
+import { useContext, useState, createContext, ReactElement } from "react";
 import { api } from "../Api/Api";
 import { setCookie } from "./setCockie";
 import { deleteCookie } from "./deleteCockie";
+import { AuthContext, TAuth } from "./context";
 
-const AuthContext = createContext(undefined);
+// export function ProvideAuth({ children }: {children: ReactElement}) {
+//   const auth = useProvideAuth();
+//   // @ts-ignore
+//   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
+// }
 
-export function ProvideAuth({ children }) {
+export type TProvideAuth = {
+  children: ReactElement;
+};
+
+export function ProvideAuth({ children }: TProvideAuth) {
   const auth = useProvideAuth();
-  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
-}
+  return <AuthContext.Provider value={undefined}>{children}</AuthContext.Provider>;
+};
 
 export function useAuth() {
-  return useContext(AuthContext);
+ return useContext<TAuth>(AuthContext);
 }
 
-export function useProvideAuth() {
+export function useProvideAuth(): TAuth {
   const [user, setUser] = useState(null);
 
   const registrationUser = async (form) => {

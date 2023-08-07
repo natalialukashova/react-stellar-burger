@@ -19,6 +19,11 @@ export type TIngredient = {
   };
 };
 
+export interface IIngredient {
+  _id: string;
+  type: string;
+};
+
 export type TElement = {
   element: ReactElement;
 };

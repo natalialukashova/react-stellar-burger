@@ -11,32 +11,13 @@ import {
 } from "../../services/ConstuctorSlice";
 import { useDrag } from "react-dnd";
 import { useLocation, Link } from "react-router-dom";
-import { TIngredient } from "../../utils/types";
+import { IIngredient, TIngredient } from "../../utils/types";
 
 export default function IngredientCard({
   ingredient,
 }: TIngredient): ReactElement {
   const dispatch = useDispatch();
-  const {
-    image,
-    name,
-    price,
-  }: {
-    _id: string;
-    name: string;
-    price: number;
-    type: string;
-    calories: number;
-    carbohydrates: number;
-    fat: number;
-    proteins: number;
-    image: string;
-    image_large: string;
-    image_mobile: string;
-    __v: number;
-    uuid?: string | undefined;
-    index?: number | undefined;
-  } = ingredient;
+  const { image, name, price } = ingredient;
 
   const location = useLocation();
   const background = location.state && location.state.background;
@@ -44,13 +25,12 @@ export default function IngredientCard({
   const bun = useSelector(selectConstructorBuns);
   const fillings = useSelector(selectConstructorIngredients);
 
-  const count = (ingredient: { type: string; _id: number }) => {
+  const count = (ingredient: IIngredient): number => {
     if (ingredient.type === "bun") {
       return ingredient._id === bun._id ? 2 : 0;
     }
-    return fillings.filter(
-      (item: { type: string; _id: number }) => item._id === ingredient._id
-    ).length;
+    return fillings.filter((item: IIngredient) => item._id === ingredient._id)
+      .length;
   };
 
   const [, dragRef] = useDrag({
